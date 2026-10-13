@@ -5,19 +5,24 @@
 
   const ICON_OPTIONS = [
     { value: 'star', label: '⭐ Bintang (Poles & Detailing / Unggulan)' },
-    { value: 'time', label: '⏱️ Jam / Waktu (Layanan Cepat / Tahan Lama)' },
+    { value: 'gloss', label: '✨ Kilau / Sparkle (High Gloss Finish 8.5 mil)' },
+    { value: 'heal', label: '🔄 Self-Healing (Pemulihan Baret Otomatis)' },
     { value: 'shield', label: '🛡️ Perisai (Perlindungan Cat / Anti Baret)' },
-    { value: 'heal', label: '💖 Hati (Self-Healing Technology)' },
-    { value: 'gloss', label: '✨ Kilau (High Gloss Finish 8.5 mil)' },
+    { value: 'shield_check', label: '🔰 Perisai Ceklis (Garansi & Proteksi Teruji)' },
     { value: 'towing', label: '🚚 Truk Towing (Antar Jemput Gratis)' },
-    { value: 'car', label: '🚗 Mobil (Detailing / Full Unit)' },
-    { value: 'award', label: '🏆 Penghargaan / Sertifikat Resmi' },
-    { value: 'check', label: '✔️ Ceklis (Presisi & Teruji)' },
-    { value: 'wrench', label: '🔧 Kunci Pas (Certified Applicator / Teknisi)' },
-    { value: 'layers', label: '📑 Lapisan (Film Ketebalan / Multi-layer)' },
-    { value: 'droplet', label: '💧 Tetesan Air (Hidrofobik / Nano Coating)' },
+    { value: 'wrench', label: '🔧 Kunci Pas (Certified Applicator / Teknisi Ahli)' },
+    { value: 'gift', label: '🎁 Hadiah / Bonus (FREE Karpet / Bonus Maintenance)' },
+    { value: 'heart', label: '💖 Hati (Pelayanan Ramah / Terfavorit)' },
+    { value: 'layers', label: '📑 Lapisan Film (Ketebalan PPF 8.5 mil)' },
+    { value: 'diamond', label: '💎 Berlian (High Clarity & Kilap Ekstrem)' },
+    { value: 'droplet', label: '💧 Tetesan Air (Hidrofobik / Efek Daun Talas)' },
+    { value: 'flame', label: '🔥 Tahan Panas (Heat Activation Suhu Tinggi)' },
     { value: 'sun', label: '☀️ Matahari (Anti UV / Tahan Cuaca Panas)' },
-    { value: 'medal', label: '🎖️ Medali (Garansi 10+ Tahun)' }
+    { value: 'car', label: '🚗 Mobil (Detailing / Full Unit)' },
+    { value: 'award', label: '🏆 Piala / Penghargaan Resmi' },
+    { value: 'check', label: '✔️ Ceklis (Presisi & Teruji)' },
+    { value: 'medal', label: '🎖️ Medali (Garansi 10+ Tahun)' },
+    { value: 'time', label: '⏱️ Jam / Waktu (Layanan Cepat / Tahan Lama)' }
   ];
 
   const RATING_OPTIONS = [
@@ -94,13 +99,16 @@
         const txt = typeof o === 'object' ? o.label : o;
         return `<option value="${escHtml(val)}">${escHtml(txt)}</option>`;
       }).join('');
-      input.onchange = () => { obj[key] = input.value; };
+      const firstVal = typeof opts[0] === 'object' ? opts[0].value : opts[0];
+      input.value = obj[key] || firstVal;
+      obj[key] = input.value;
+      input.onchange = input.oninput = () => { obj[key] = input.value; };
     }
     else if (type === 'bool') { input = document.createElement('input'); input.type = 'checkbox'; input.style.width = 'auto'; input.checked = !!obj[key]; input.onchange = () => (obj[key] = input.checked); wrap.append(input); return wrap; }
     else { input = document.createElement('input'); input.type = type === 'date' ? 'date' : 'text'; }
-    input.value = obj[key] ?? '';
+    if (type !== 'select') input.value = obj[key] ?? '';
     let prev;
-    input.oninput = () => { obj[key] = input.value; if (prev) prev.src = safeUrl(input.value, ''); };
+    if (type !== 'select') input.oninput = () => { obj[key] = input.value; if (prev) prev.src = safeUrl(input.value, ''); };
     wrap.append(input);
     if (type === 'image') {
       input.placeholder = 'Path (uploads/...) / URL https, atau upload file';

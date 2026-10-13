@@ -66,7 +66,8 @@ const LOCAL_IMG = /^(assets|uploads)\/[A-Za-z0-9._-]+\.(jpe?g|png|webp|gif)$/i;
 const HANDLE = /^@?[A-Za-z0-9._]{1,60}$/;
 const isHttps = (s) => { try { return new URL(s).protocol === 'https:'; } catch { return false; } };
 const ALLOWED_ICONS = new Set([
-  'shield', 'heal', 'heart', 'gloss', 'time', 'clock',
+  'shield', 'shield_check', 'heal', 'heart', 'gloss', 'sparkle',
+  'diamond', 'gift', 'flame', 'magic', 'time', 'clock',
   'star', 'towing', 'car', 'award', 'check', 'wrench',
   'layers', 'droplet', 'sun', 'medal'
 ]);
