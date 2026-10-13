@@ -156,49 +156,5 @@
     if (en.isIntersecting) { en.target.style.transitionDelay = `${(i % 3) * 0.1}s`; en.target.classList.add('visible'); io.unobserve(en.target); }
   }), { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-
-  // Day / Night Theme Engine (06:00 - 18:00 Siang = Light, 18:00 - 06:00 Malam = Dark)
-  const themeToggle = $('themeToggle');
-  const themeText = $('themeText');
-  const getAutoTheme = () => {
-    const h = new Date().getHours();
-    return (h >= 6 && h < 18) ? 'light' : 'dark';
-  };
-
-  const updateThemeUI = (theme) => {
-    document.documentElement.setAttribute('data-theme', theme);
-    if (themeToggle) {
-      const isManual = !!localStorage.getItem('xp_theme');
-      const label = theme === 'light' ? 'Siang' : 'Malam';
-      if (themeText) {
-        themeText.textContent = isManual ? label : `${label} • Auto`;
-      }
-      themeToggle.title = isManual
-        ? `Mode ${label} (Klik untuk beralih mode)`
-        : `Mode ${label} Otomatis (06.00-18.00 Siang, 18.00-06.00 Malam). Klik untuk beralih.`;
-    }
-  };
-
-  const initialTheme = localStorage.getItem('xp_theme') || getAutoTheme();
-  updateThemeUI(initialTheme);
-
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme') || 'dark';
-      const next = current === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('xp_theme', next);
-      updateThemeUI(next);
-    });
-  }
-
-  // Periksa otomatis setiap 60 detik jika pengguna tidak mengunci preferensi manual
-  setInterval(() => {
-    if (!localStorage.getItem('xp_theme')) {
-      const autoTheme = getAutoTheme();
-      if (document.documentElement.getAttribute('data-theme') !== autoTheme) {
-        updateThemeUI(autoTheme);
-      }
-    }
-  }, 60000);
 })();
 
