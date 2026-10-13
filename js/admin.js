@@ -41,7 +41,7 @@
       list: { key: 'benefits', label: 'Benefit', fields: [['icon', 'Pilihan Ikon', 'select', ICON_OPTIONS], ['title', 'Judul'], ['text', 'Deskripsi', 'textarea']] } },
     services: { title: 'Layanan', list: { label: 'Layanan', fields: [['title', 'Judul'], ['text', 'Deskripsi', 'textarea']] } },
     gallery: { title: 'Gallery', list: { label: 'Foto', fields: [['image', 'Gambar', 'image'], ['caption', 'Keterangan']] } },
-    pricing: { title: 'Harga', list: { label: 'Paket', fields: [['name', 'Nama Paket'], ['price', 'Harga'], ['features', 'Fitur (satu per baris)', 'textarea'], ['featured', 'Tandai Paling Populer', 'bool']] } },
+    pricing: { title: 'Harga', list: { label: 'Paket', fields: [['name', 'Nama Paket'], ['price', 'Harga Promo / Sekarang (cth: Rp 18.000.000)'], ['originalPrice', 'Harga Coret / Normal (opsional, cth: Rp 23.000.000)'], ['features', 'Fitur (satu per baris)', 'textarea'], ['featured', 'Tandai Paling Populer', 'bool']] } },
     reviews: {
       title: 'Review / Testimonial',
       fields: [

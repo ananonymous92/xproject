@@ -239,7 +239,9 @@ body.nav-open{overflow:hidden}
 .price-card.featured{background:var(--featured-bg);border-color:var(--gold);box-shadow:var(--featured-shadow)}
 .price-card.featured::before{content:"Paling Populer";position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-size:.72rem;font-weight:700;padding:5px 14px;border-radius:999px;letter-spacing:1px;text-transform:uppercase}
 .price-card h3{font-size:1.3rem;margin-bottom:8px}
-.price-card .price{font-family:Outfit;font-size:2rem;font-weight:700;margin-bottom:28px;background:var(--grad);-webkit-background-clip:text;color:transparent}
+.price-wrap{margin-bottom:28px;display:flex;flex-direction:column;gap:4px}
+.price-orig{font-family:Outfit,sans-serif;font-size:1.1rem;font-weight:600;color:var(--muted);text-decoration:line-through;text-decoration-color:#ff4444;text-decoration-thickness:2px;letter-spacing:.3px;opacity:.85}
+.price-card .price{font-family:Outfit;font-size:2rem;font-weight:700;margin-bottom:0;background:var(--grad);-webkit-background-clip:text;color:transparent;line-height:1.15}
 .price-card ul{list-style:none;margin-bottom:32px;flex:1}
 .price-card li{padding:10px 0;border-bottom:1px solid var(--line);color:var(--text);font-size:.92rem}
 .price-card li::before{content:"✓";color:var(--gold);margin-right:10px}
@@ -824,9 +826,16 @@ body.nav-open{overflow:hidden}
   .price-card h3{
     font-size:1.18rem;
   }
+  .price-wrap{
+    margin-bottom:18px;
+    gap:2px;
+  }
+  .price-orig{
+    font-size:.95rem;
+  }
   .price-card .price{
     font-size:1.75rem;
-    margin-bottom:18px;
+    margin-bottom:0;
   }
   .price-card ul{
     margin-bottom:20px;

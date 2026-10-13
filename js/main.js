@@ -76,12 +76,19 @@
   document.addEventListener('keydown', (e) => e.key === 'Escape' && lb.classList.remove('open'));
 
   // Pricing
-  $('pricing').innerHTML = C.pricing.map((p) => `
-    <div class="price-card reveal ${p.featured ? 'featured' : ''}">
-      <h3>${esc(p.name)}</h3><div class="price">${esc(p.price)}</div>
-      <ul>${p.features.split('\n').filter(Boolean).map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
-      <a class="btn ${p.featured ? 'btn-gold' : 'btn-ghost'}" target="_blank" rel="noopener" href="${waUrl(`Halo, saya tertarik dengan paket ${p.name}.`)}">Pilih Paket</a>
-    </div>`).join('');
+  $('pricing').innerHTML = C.pricing.map((p) => {
+    const origHtml = p.originalPrice ? `<span class="price-orig">${esc(p.originalPrice)}</span>` : '';
+    return `
+      <div class="price-card reveal ${p.featured ? 'featured' : ''}">
+        <h3>${esc(p.name)}</h3>
+        <div class="price-wrap">
+          ${origHtml}
+          <div class="price">${esc(p.price)}</div>
+        </div>
+        <ul>${p.features.split('\n').filter(Boolean).map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+        <a class="btn ${p.featured ? 'btn-gold' : 'btn-ghost'}" target="_blank" rel="noopener" href="${waUrl(`Halo, saya tertarik dengan paket ${p.name}.`)}">Pilih Paket</a>
+      </div>`;
+  }).join('');
   $('fPkg').innerHTML = '<option value="">Pilih Paket (opsional)</option>' + C.pricing.map((p) => `<option>${esc(p.name)}</option>`).join('');
 
   // Date formatter

@@ -37,9 +37,9 @@
     { "image": "assets/ppf.jpg", "caption": "Wet Install Technique" }
   ],
   "pricing": [
-    { "name": "Front Package", "price": "Mulai Rp 8,5 Jt", "features": "Bumper depan\nKap mesin\nFender depan\nSpion\nGaransi 5 tahun", "featured": false },
-    { "name": "Full Body Gloss", "price": "Mulai Rp 28 Jt", "features": "Seluruh panel body\nSelf healing film\nHigh gloss finish\nFree ceramic coating kaca\nGaransi 10 tahun", "featured": true },
-    { "name": "Full Body Matte", "price": "Mulai Rp 32 Jt", "features": "Seluruh panel body\nMatte / Satin finish\nSelf healing film\nFree interior protection\nGaransi 10 tahun", "featured": false }
+    { "name": "Front Package", "price": "Mulai Rp 8,5 Jt", "originalPrice": "Rp 12 Jt", "features": "Bumper depan\nKap mesin\nFender depan\nSpion\nGaransi 5 tahun", "featured": false },
+    { "name": "Full Body Gloss", "price": "Mulai Rp 28 Jt", "originalPrice": "Rp 35 Jt", "features": "Seluruh panel body\nSelf healing film\nHigh gloss finish\nFree ceramic coating kaca\nGaransi 10 tahun", "featured": true },
+    { "name": "Full Body Matte", "price": "Mulai Rp 32 Jt", "originalPrice": "Rp 40 Jt", "features": "Seluruh panel body\nMatte / Satin finish\nSelf healing film\nFree interior protection\nGaransi 10 tahun", "featured": false }
   ],
   "reviews": {
     "title": "Apa Kata Klien Kami",
