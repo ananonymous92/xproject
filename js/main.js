@@ -29,7 +29,12 @@
   $('heroSub').textContent = C.hero.subheadline;
   $('heroCta1').textContent = C.hero.cta1;
   $('heroCta2').textContent = C.hero.cta2;
-  $('heroBadges').innerHTML = C.hero.badges.split('•').map((b) => `<span>${esc(b.trim())}</span>`).join('');
+  $('heroBadges').innerHTML = (C.hero.badges || '')
+    .split(/[•·.|\n]+/)
+    .map((b) => b.trim())
+    .filter(Boolean)
+    .map((b) => `<span>${esc(b)}</span>`)
+    .join('');
 
   // About
   $('aboutImg').src = safeUrl(C.about.image, '');
@@ -49,6 +54,7 @@
     lb.classList.add('open');
   });
   lb.addEventListener('click', () => lb.classList.remove('open'));
+  $('lbClose')?.addEventListener('click', (e) => { e.stopPropagation(); lb.classList.remove('open'); });
   document.addEventListener('keydown', (e) => e.key === 'Escape' && lb.classList.remove('open'));
 
   // Pricing
@@ -139,17 +145,29 @@
   }
 
   // Navbar behaviour
-  const nav = $('navbar'), links = $('navLinks'), burger = $('burger');
+  const nav = $('navbar'), links = $('navLinks'), burger = $('burger'), backdrop = $('navBackdrop');
+  const closeNav = () => {
+    burger?.classList.remove('open');
+    links?.classList.remove('open');
+    backdrop?.classList.remove('open');
+    document.body.classList.remove('nav-open');
+  };
+  const toggleNav = () => {
+    const isOpen = links?.classList.toggle('open');
+    burger?.classList.toggle('open', isOpen);
+    backdrop?.classList.toggle('open', isOpen);
+    document.body.classList.toggle('nav-open', isOpen);
+  };
   const onScroll = () => nav.classList.toggle('scrolled', scrollY > 40);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
-  burger.addEventListener('click', () => { burger.classList.toggle('open'); links.classList.toggle('open'); });
+  burger?.addEventListener('click', toggleNav);
+  backdrop?.addEventListener('click', closeNav);
 
   // Smooth scroll dengan URL bersih (mencegah penumpukan hash #home dsb di address bar jika diinginkan)
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener('click', (e) => {
       const targetId = a.getAttribute('href').slice(1);
-      burger.classList.remove('open');
-      links.classList.remove('open');
+      closeNav();
       if (!targetId || targetId === 'home') {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
