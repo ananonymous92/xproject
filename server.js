@@ -227,7 +227,8 @@ app.use('/css', express.static(path.join(ROOT, 'css'), staticOpts));
 app.use('/js', express.static(path.join(ROOT, 'js'), staticOpts));
 app.use('/assets', express.static(path.join(ROOT, 'assets'), staticOpts));
 app.use('/uploads', express.static(UPLOAD_DIR, staticOpts));
-app.get(['/', '/index.html'], (req, res) => res.sendFile(path.join(ROOT, 'index.html')));
+app.get('/index.html', (req, res) => res.redirect(301, '/'));
+app.get('/', (req, res) => res.sendFile(path.join(ROOT, 'index.html')));
 app.get('/admin.html', (req, res) => { res.setHeader('X-Robots-Tag', 'noindex, nofollow'); res.sendFile(path.join(ROOT, 'admin.html')); });
 
 app.use((req, res) => res.status(404).send('Not found'));
