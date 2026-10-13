@@ -143,7 +143,29 @@
   const onScroll = () => nav.classList.toggle('scrolled', scrollY > 40);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
   burger.addEventListener('click', () => { burger.classList.toggle('open'); links.classList.toggle('open'); });
-  links.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { burger.classList.remove('open'); links.classList.remove('open'); }));
+
+  // Smooth scroll dengan URL bersih (mencegah penumpukan hash #home dsb di address bar jika diinginkan)
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const targetId = a.getAttribute('href').slice(1);
+      burger.classList.remove('open');
+      links.classList.remove('open');
+      if (!targetId || targetId === 'home') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (location.hash) {
+          history.replaceState(null, '', location.pathname);
+        }
+      } else {
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+          history.replaceState(null, '', location.pathname);
+        }
+      }
+    });
+  });
 
   // Active link + reveal on scroll
   const navMap = {}; links.querySelectorAll('a[href^="#"]').forEach((a) => (navMap[a.getAttribute('href').slice(1)] = a));
