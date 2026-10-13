@@ -164,7 +164,30 @@
   $('locAddress').textContent = C.location.address;
   $('locHours').textContent = C.location.hours;
   $('locMap').src = safeUrl(C.location.mapEmbed, 'about:blank');
-  $('locDir').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(C.location.address)}`;
+
+  // Petunjuk Arah: prioritas link langsung (mapUrl), jika kosong ekstrak koordinat dari mapEmbed, fallback ke pencarian teks alamat
+  let directionsUrl = '';
+  if (C.location.mapUrl && safeUrl(C.location.mapUrl, '') !== '') {
+    directionsUrl = safeUrl(C.location.mapUrl);
+  } else if (C.location.mapEmbed) {
+    try {
+      const embedUrl = new URL(C.location.mapEmbed);
+      const q = embedUrl.searchParams.get('q');
+      if (q) {
+        directionsUrl = `https://www.google.com/maps?q=${encodeURIComponent(q)}`;
+      } else {
+        const pb = embedUrl.searchParams.get('pb') || embedUrl.pathname;
+        const coords = pb.match(/!2d(-?[\d.]+)!3d(-?[\d.]+)/);
+        if (coords) {
+          directionsUrl = `https://www.google.com/maps?q=${coords[2]},${coords[1]}`;
+        }
+      }
+    } catch {}
+  }
+  if (!directionsUrl) {
+    directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(C.location.address)}`;
+  }
+  $('locDir').href = directionsUrl;
 
   // News
   $('newsGrid').innerHTML = C.news.map((n) => `<article class="post reveal"><div class="thumb"><img src="${esc(safeUrl(n.image, ''))}" alt="${esc(n.title)}" loading="lazy"></div><div class="body"><time>${fmt(n.date)}</time><h3>${esc(n.title)}</h3><p>${esc(n.text)}</p></div></article>`).join('');

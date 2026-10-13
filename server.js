@@ -78,9 +78,16 @@ function cleanField(key, val, fallback) {
     case 'image': case 'logo': case 'avatar':
       if (s === '' && (key === 'logo' || key === 'avatar')) return '';
       return LOCAL_IMG.test(s) || isHttps(s) ? s : fallback;
-    case 'mapEmbed':
-      try { const u = new URL(s); return u.protocol === 'https:' && /(^|\.)google\.[a-z.]+$/.test(u.hostname) ? s : fallback; }
+    case 'mapEmbed': {
+      let raw = s;
+      const m = raw.match(/src=["'](https:\/\/[^"']+)["']/i);
+      if (m) raw = m[1];
+      try { const u = new URL(raw); return u.protocol === 'https:' && /(^|\.)google\.[a-z.]+$/.test(u.hostname) ? raw : fallback; }
       catch { return fallback; }
+    }
+    case 'mapUrl':
+      if (s === '') return '';
+      return isHttps(s) ? s : fallback;
     case 'facebook': case 'instagram':
       return s === '' || HANDLE.test(s) || isHttps(s) ? s : fallback;
     case 'whatsapp':

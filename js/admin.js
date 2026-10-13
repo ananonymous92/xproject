@@ -60,7 +60,15 @@
         ]
       }
     },
-    location: { title: 'Location', fields: [['address', 'Alamat', 'textarea'], ['hours', 'Jam Operasional'], ['mapEmbed', 'URL Embed Google Maps (https://www.google.com/maps...)']] },
+    location: {
+      title: 'Location',
+      fields: [
+        ['address', 'Alamat', 'textarea'],
+        ['hours', 'Jam Operasional'],
+        ['mapEmbed', 'URL Embed Google Maps (iframe src https://www.google.com/maps...)'],
+        ['mapUrl', 'Link Google Maps / Petunjuk Arah (opsional, cth: https://maps.app.goo.gl/... atau link Buka di Maps)']
+      ]
+    },
     news: { title: 'News', list: { label: 'Artikel', fields: [['image', 'Gambar', 'image'], ['date', 'Tanggal', 'date'], ['title', 'Judul'], ['text', 'Ringkasan', 'textarea']] } },
     contact: { title: 'Contact', fields: [['phone', 'Telepon'], ['email', 'Email'], ['instagram', 'Instagram (Username / URL https)'], ['facebook', 'Facebook (Username / URL https)']] },
     footer: {
@@ -108,7 +116,16 @@
     else { input = document.createElement('input'); input.type = type === 'date' ? 'date' : 'text'; }
     if (type !== 'select') input.value = obj[key] ?? '';
     let prev;
-    if (type !== 'select') input.oninput = () => { obj[key] = input.value; if (prev) prev.src = safeUrl(input.value, ''); };
+    if (type !== 'select') {
+      input.oninput = () => {
+        if (key === 'mapEmbed' && input.value.includes('<iframe')) {
+          const m = input.value.match(/src=["'](https:\/\/[^"']+)["']/i);
+          if (m) input.value = m[1];
+        }
+        obj[key] = input.value;
+        if (prev) prev.src = safeUrl(input.value, '');
+      };
+    }
     wrap.append(input);
     if (type === 'image') {
       input.placeholder = 'Path (uploads/...) / URL https, atau upload file';

@@ -74,7 +74,8 @@
   "location": {
     "address": "Jl. Sudirman Kav. 52, Jakarta Selatan, DKI Jakarta 12190",
     "hours": "Senin – Sabtu: 09.00 – 18.00 | Minggu: Dengan Janji",
-    "mapEmbed": "https://www.google.com/maps?q=Jakarta%20Selatan&output=embed"
+    "mapEmbed": "https://www.google.com/maps?q=Jakarta%20Selatan&output=embed",
+    "mapUrl": ""
   },
   "news": [
     { "image": "assets/ppf.jpg", "date": "2026-09-20", "title": "PPF vs Ceramic Coating: Mana yang Tepat untuk Mobil Anda?", "text": "Pahami perbedaan fungsi, daya tahan, dan biaya keduanya sebelum memutuskan." },
