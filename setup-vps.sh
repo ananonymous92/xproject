@@ -57,7 +57,7 @@ if [ ! -f "$APP_DIR/.env" ]; then
   cat > "$APP_DIR/.env" <<EOF
 NODE_ENV=production
 HOST=127.0.0.1
-PORT=3000
+PORT=3005
 SESSION_HOURS=8
 $HASH_OUTPUT
 EOF
@@ -86,7 +86,7 @@ ExecStart=/usr/bin/node server.js
 Restart=always
 RestartSec=5
 Environment=NODE_ENV=production
-Environment=PORT=3000
+Environment=PORT=3005
 Environment=HOST=127.0.0.1
 ProtectSystem=full
 NoNewPrivileges=true
@@ -114,7 +114,7 @@ server {
     client_max_body_size 5M;
 
     location / {
-        proxy_pass http://127.0.0.1:3000;
+        proxy_pass http://127.0.0.1:3005;
         proxy_http_version 1.1;
         proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection 'upgrade';

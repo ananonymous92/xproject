@@ -10,7 +10,7 @@ ExecStart=/usr/bin/node server.js
 Restart=always
 RestartSec=5
 Environment=NODE_ENV=production
-Environment=PORT=3000
+Environment=PORT=3005
 Environment=HOST=127.0.0.1
 
 # Pengamanan proses systemd
