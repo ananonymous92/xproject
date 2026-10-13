@@ -106,9 +106,26 @@ echo ""
 read -rp "🌐 Masukkan nama domain Anda (contoh: xproject.id) atau tekan Enter untuk IP: " DOMAIN_NAME
 
 if [ -n "$DOMAIN_NAME" ]; then
-  sed "s/domainanda.com/$DOMAIN_NAME/g" "$APP_DIR/nginx.conf.example" > "/etc/nginx/sites-available/xproject"
+  cat > /etc/nginx/sites-available/xproject <<EOF
+server {
+    listen 80;
+    listen [::]:80;
+    server_name $DOMAIN_NAME www.$DOMAIN_NAME;
+    client_max_body_size 5M;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    }
+}
+EOF
 else
-  # Konfigurasi dasar HTTP untuk IP langsung
   cat > /etc/nginx/sites-available/xproject <<'EOF'
 server {
     listen 80;
@@ -139,6 +156,16 @@ systemctl reload nginx
 ufw allow OpenSSH >/dev/null 2>&1 || true
 ufw allow 'Nginx Full' >/dev/null 2>&1 || true
 ufw --force enable >/dev/null 2>&1 || true
+
+# 10. Pasang SSL jika domain diisi
+if [ -n "$DOMAIN_NAME" ]; then
+  echo ""
+  echo "🔒 Memasang sertifikat SSL (HTTPS) gratis dari Let's Encrypt..."
+  certbot --nginx --non-interactive --agree-tos --redirect -d "$DOMAIN_NAME" || {
+    echo "⚠️ Certbot otomatis belum selesai (pastikan DNS domain sudah mengarah ke IP ini)."
+    echo "Anda bisa menjalankan manual nanti: certbot --nginx -d $DOMAIN_NAME"
+  }
+fi
 
 echo ""
 echo "=============================================="
