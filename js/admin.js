@@ -3,15 +3,59 @@
   const $ = (id) => document.getElementById(id);
   const escHtml = (s = '') => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
+  const ICON_OPTIONS = [
+    { value: 'star', label: '⭐ Bintang (Poles & Detailing / Unggulan)' },
+    { value: 'time', label: '⏱️ Jam / Waktu (Layanan Cepat / Tahan Lama)' },
+    { value: 'shield', label: '🛡️ Perisai (Perlindungan Cat / Anti Baret)' },
+    { value: 'heal', label: '💖 Hati (Self-Healing Technology)' },
+    { value: 'gloss', label: '✨ Kilau (High Gloss Finish 8.5 mil)' },
+    { value: 'towing', label: '🚚 Truk Towing (Antar Jemput Gratis)' },
+    { value: 'car', label: '🚗 Mobil (Detailing / Full Unit)' },
+    { value: 'award', label: '🏆 Penghargaan / Sertifikat Resmi' },
+    { value: 'check', label: '✔️ Ceklis (Presisi & Teruji)' },
+    { value: 'wrench', label: '🔧 Kunci Pas (Certified Applicator / Teknisi)' },
+    { value: 'layers', label: '📑 Lapisan (Film Ketebalan / Multi-layer)' },
+    { value: 'droplet', label: '💧 Tetesan Air (Hidrofobik / Nano Coating)' },
+    { value: 'sun', label: '☀️ Matahari (Anti UV / Tahan Cuaca Panas)' },
+    { value: 'medal', label: '🎖️ Medali (Garansi 10+ Tahun)' }
+  ];
+
+  const RATING_OPTIONS = [
+    { value: '5', label: '⭐⭐⭐⭐⭐ (5 Bintang - Sangat Puas)' },
+    { value: '4', label: '⭐⭐⭐⭐ (4 Bintang - Puas)' },
+    { value: '3', label: '⭐⭐⭐ (3 Bintang - Cukup)' },
+    { value: '2', label: '⭐⭐ (2 Bintang)' },
+    { value: '1', label: '⭐ (1 Bintang)' }
+  ];
+
   // Field schema per tab. type: text | textarea | image | bool | select
   const SCHEMA = {
     brand: { title: 'Brand & Logo', fields: [['name', 'Nama Bisnis'], ['logo', 'Logo (kosongkan untuk logo teks)', 'image'], ['whatsapp', 'Nomor WhatsApp (format 628xxx)'], ['waMessage', 'Pesan Default WhatsApp', 'textarea']] },
     hero: { title: 'Hero / Banner', fields: [['image', 'Gambar Hero', 'image'], ['eyebrow', 'Label Kecil'], ['headline', 'Headline', 'textarea'], ['subheadline', 'Subheadline', 'textarea'], ['cta1', 'Teks Tombol 1'], ['cta2', 'Teks Tombol 2'], ['badges', 'Badge (pisahkan dengan •)']] },
     about: { title: 'Apa Itu PPF', fields: [['image', 'Gambar', 'image'], ['title', 'Judul'], ['text', 'Deskripsi', 'textarea']],
-      list: { key: 'benefits', label: 'Benefit', fields: [['icon', 'Ikon', 'select', ['shield', 'heal', 'gloss', 'time']], ['title', 'Judul'], ['text', 'Deskripsi', 'textarea']] } },
+      list: { key: 'benefits', label: 'Benefit', fields: [['icon', 'Pilihan Ikon', 'select', ICON_OPTIONS], ['title', 'Judul'], ['text', 'Deskripsi', 'textarea']] } },
     services: { title: 'Layanan', list: { label: 'Layanan', fields: [['title', 'Judul'], ['text', 'Deskripsi', 'textarea']] } },
     gallery: { title: 'Gallery', list: { label: 'Foto', fields: [['image', 'Gambar', 'image'], ['caption', 'Keterangan']] } },
     pricing: { title: 'Harga', list: { label: 'Paket', fields: [['name', 'Nama Paket'], ['price', 'Harga'], ['features', 'Fitur (satu per baris)', 'textarea'], ['featured', 'Tandai Paling Populer', 'bool']] } },
+    reviews: {
+      title: 'Review / Testimonial',
+      fields: [
+        ['title', 'Judul Section Review'],
+        ['subtitle', 'Subjudul / Keterangan', 'textarea']
+      ],
+      list: {
+        key: 'items',
+        label: 'Review',
+        fields: [
+          ['name', 'Nama Klien / Pelanggan'],
+          ['car', 'Mobil / Layanan (cth: Porsche 911 — Full PPF)'],
+          ['rating', 'Rating Bintang', 'select', RATING_OPTIONS],
+          ['comment', 'Isi Ulasan / Testimonial', 'textarea'],
+          ['date', 'Tanggal Review', 'date'],
+          ['avatar', 'Foto Klien / Mobil (opsional, kosong = inisial)', 'image']
+        ]
+      }
+    },
     location: { title: 'Location', fields: [['address', 'Alamat', 'textarea'], ['hours', 'Jam Operasional'], ['mapEmbed', 'URL Embed Google Maps (https://www.google.com/maps...)']] },
     news: { title: 'News', list: { label: 'Artikel', fields: [['image', 'Gambar', 'image'], ['date', 'Tanggal', 'date'], ['title', 'Judul'], ['text', 'Ringkasan', 'textarea']] } },
     contact: { title: 'Contact', fields: [['phone', 'Telepon'], ['email', 'Email'], ['instagram', 'Instagram (Username / URL https)'], ['facebook', 'Facebook (Username / URL https)']] },
@@ -44,7 +88,15 @@
     const lbl = document.createElement('label'); lbl.textContent = label; wrap.append(lbl);
     let input;
     if (type === 'textarea') { input = document.createElement('textarea'); input.rows = 3; }
-    else if (type === 'select') { input = document.createElement('select'); input.innerHTML = opts.map((o) => `<option>${escHtml(o)}</option>`).join(''); }
+    else if (type === 'select') {
+      input = document.createElement('select');
+      input.innerHTML = opts.map((o) => {
+        const val = typeof o === 'object' ? o.value : o;
+        const txt = typeof o === 'object' ? o.label : o;
+        return `<option value="${escHtml(val)}">${escHtml(txt)}</option>`;
+      }).join('');
+      input.onchange = () => { obj[key] = input.value; };
+    }
     else if (type === 'bool') { input = document.createElement('input'); input.type = 'checkbox'; input.style.width = 'auto'; input.checked = !!obj[key]; input.onchange = () => (obj[key] = input.checked); wrap.append(input); return wrap; }
     else { input = document.createElement('input'); input.type = type === 'date' ? 'date' : 'text'; }
     input.value = obj[key] ?? '';
@@ -72,8 +124,20 @@
     const s = SCHEMA[current], ed = $('editor'); ed.innerHTML = '';
     $('tabTitle').textContent = s.title;
     document.querySelectorAll('#tabs a').forEach((a) => a.classList.toggle('on', a.dataset.k === current));
-    if (s.fields) { const box = document.createElement('div'); box.className = 'item'; s.fields.forEach((f) => box.append(fieldEl(data[current], f))); ed.append(box); }
+    if (s.fields) {
+      if (!data[current]) data[current] = {};
+      const box = document.createElement('div');
+      box.className = 'item';
+      s.fields.forEach((f) => box.append(fieldEl(data[current], f)));
+      ed.append(box);
+    }
     if (s.list) {
+      if (s.list.key) {
+        if (!data[current]) data[current] = {};
+        if (!Array.isArray(data[current][s.list.key])) data[current][s.list.key] = [];
+      } else {
+        if (!Array.isArray(data[current])) data[current] = [];
+      }
       const arr = s.list.key ? data[current][s.list.key] : data[current];
       arr.forEach((it, i) => {
         const box = document.createElement('div'); box.className = 'item';
@@ -87,7 +151,16 @@
         ed.append(box);
       });
       const add = document.createElement('button'); add.className = 'ghost'; add.textContent = `+ Tambah ${s.list.label}`;
-      add.onclick = () => { const n = {}; s.list.fields.forEach(([k, , t, o]) => (n[k] = t === 'bool' ? false : t === 'select' ? o[0] : '')); arr.push(n); render(); };
+      add.onclick = () => {
+        const n = {};
+        s.list.fields.forEach(([k, , t, o]) => {
+          if (t === 'bool') n[k] = false;
+          else if (t === 'select') n[k] = typeof o[0] === 'object' ? o[0].value : o[0];
+          else n[k] = '';
+        });
+        arr.push(n);
+        render();
+      };
       ed.append(add);
     }
   }

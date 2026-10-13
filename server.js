@@ -65,12 +65,17 @@ const MAX_STR = 5000, MAX_ITEMS = 60;
 const LOCAL_IMG = /^(assets|uploads)\/[A-Za-z0-9._-]+\.(jpe?g|png|webp|gif)$/i;
 const HANDLE = /^@?[A-Za-z0-9._]{1,60}$/;
 const isHttps = (s) => { try { return new URL(s).protocol === 'https:'; } catch { return false; } };
+const ALLOWED_ICONS = new Set([
+  'shield', 'heal', 'heart', 'gloss', 'time', 'clock',
+  'star', 'towing', 'car', 'award', 'check', 'wrench',
+  'layers', 'droplet', 'sun', 'medal'
+]);
 
 function cleanField(key, val, fallback) {
   const s = String(val).slice(0, MAX_STR).trim();
   switch (key) {
-    case 'image': case 'logo':
-      if (s === '' && key === 'logo') return '';
+    case 'image': case 'logo': case 'avatar':
+      if (s === '' && (key === 'logo' || key === 'avatar')) return '';
       return LOCAL_IMG.test(s) || isHttps(s) ? s : fallback;
     case 'mapEmbed':
       try { const u = new URL(s); return u.protocol === 'https:' && /(^|\.)google\.[a-z.]+$/.test(u.hostname) ? s : fallback; }
@@ -81,8 +86,10 @@ function cleanField(key, val, fallback) {
       return /^[0-9]{8,16}$/.test(s) ? s : fallback;
     case 'date':
       return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : fallback;
+    case 'rating':
+      return ['1', '2', '3', '4', '5'].includes(s) ? s : fallback;
     case 'icon':
-      return ['shield', 'heal', 'gloss', 'time'].includes(s) ? s : fallback;
+      return ALLOWED_ICONS.has(s) ? s : fallback;
     default:
       return s;
   }

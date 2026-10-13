@@ -243,6 +243,21 @@ body.nav-open{overflow:hidden}
 .price-card li{padding:10px 0;border-bottom:1px solid var(--line);color:var(--text);font-size:.92rem}
 .price-card li::before{content:"✓";color:var(--gold);margin-right:10px}
 
+/* Reviews / Testimonials */
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+.review-card{padding:36px 30px;border-radius:var(--radius);background:var(--card);border:var(--card-border);box-shadow:var(--card-shadow);display:flex;flex-direction:column;justify-content:space-between;transition:all .5s var(--ease);position:relative}
+.review-card:hover{transform:translateY(-8px);border-color:rgba(255,68,68,.4);box-shadow:0 16px 40px rgba(255,68,68,.12)}
+.r-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.r-stars{color:#ffb703;font-size:1.15rem;letter-spacing:2px}
+.r-date{font-size:.78rem;color:var(--muted)}
+.r-comment{font-size:.92rem;line-height:1.65;color:var(--text);margin-bottom:24px;flex:1;font-style:italic}
+.r-author{display:flex;align-items:center;gap:14px;padding-top:18px;border-top:1px solid var(--line)}
+.r-avatar{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);flex-shrink:0}
+.r-avatar-initials{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,rgba(255,68,68,.2),rgba(255,68,68,.05));border:1px solid var(--gold);color:var(--gold2);display:flex;align-items:center;justify-content:center;font-family:Outfit,sans-serif;font-weight:700;font-size:.92rem;flex-shrink:0}
+.r-info{display:flex;flex-direction:column;min-width:0}
+.r-name{font-size:.96rem;font-weight:600;color:var(--text);line-height:1.3}
+.r-car{font-size:.82rem;color:var(--gold);line-height:1.4;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
 /* Location */
 .location{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:center}
 .info-item{display:flex;gap:16px;margin:24px 0}
@@ -514,7 +529,7 @@ body.nav-open{overflow:hidden}
     padding:13px 20px;
   }
   .about,.location,.contact-card{grid-template-columns:1fr;gap:44px}
-  .services,.pricing,.news{grid-template-columns:repeat(2,1fr)}
+  .services,.pricing,.news,.reviews-grid{grid-template-columns:repeat(2,1fr)}
   .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:220px}
   .g-item:nth-child(6n+5){grid-column:auto}
   .footer-grid{grid-template-columns:repeat(2,1fr);gap:40px}
@@ -798,6 +813,25 @@ body.nav-open{overflow:hidden}
     top:-11px;
     font-size:.68rem;
     padding:4px 12px;
+  }
+
+  /* Reviews on Mobile */
+  .reviews-grid{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+  .review-card{
+    padding:24px 18px;
+    border-radius:18px;
+  }
+  .r-comment{
+    font-size:.88rem;
+    line-height:1.6;
+    margin-bottom:18px;
+  }
+  .r-author{
+    gap:12px;
+    padding-top:14px;
   }
 
   /* Location on Mobile */

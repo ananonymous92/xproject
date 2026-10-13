@@ -41,6 +41,36 @@
     { "name": "Full Body Gloss", "price": "Mulai Rp 28 Jt", "features": "Seluruh panel body\nSelf healing film\nHigh gloss finish\nFree ceramic coating kaca\nGaransi 10 tahun", "featured": true },
     { "name": "Full Body Matte", "price": "Mulai Rp 32 Jt", "features": "Seluruh panel body\nMatte / Satin finish\nSelf healing film\nFree interior protection\nGaransi 10 tahun", "featured": false }
   ],
+  "reviews": {
+    "title": "Apa Kata Klien Kami",
+    "subtitle": "Pengalaman nyata pemilik kendaraan premium yang mempercayakan proteksi cat mereka kepada kami.",
+    "items": [
+      {
+        "name": "Bambang Santoso",
+        "car": "Porsche 911 Carrera (Full Body PPF)",
+        "rating": "5",
+        "comment": "Hasil pengerjaan sangat presisi dan rapi, sudut panel ditekuk ke dalam sehingga nyaris tidak terlihat ada sambungan film. Kilapnya luar biasa dan self-healing bekerja dengan sangat baik. Sangat puas dengan layanannya!",
+        "date": "2026-09-15",
+        "avatar": ""
+      },
+      {
+        "name": "David Tan",
+        "car": "BMW M4 Competition (Matte / Satin PPF)",
+        "rating": "5",
+        "comment": "Merubah tampilan mobil dari glossy jadi satin matte mewah sekaligus dapat perlindungan maksimal dari stone chip di tol. Pengerjaan cepat, tepat waktu, dan timnya sangat profesional serta komunikatif.",
+        "date": "2026-08-28",
+        "avatar": ""
+      },
+      {
+        "name": "Reza Rahardian",
+        "car": "Hyundai Ioniq 5 (Front Package + Coating)",
+        "rating": "5",
+        "comment": "Pelayanan jemput towing gratis sangat membantu. Pemasangan rapi tanpa gelembung atau bekas debu. Area bumper dan kap mesin terlindungi sempurna saat perjalanan luar kota. Highly recommended!",
+        "date": "2026-08-10",
+        "avatar": ""
+      }
+    ]
+  },
   "location": {
     "address": "Jl. Sudirman Kav. 52, Jakarta Selatan, DKI Jakarta 12190",
     "hours": "Senin – Sabtu: 09.00 – 18.00 | Minggu: Dengan Janji",
