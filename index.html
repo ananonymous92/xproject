@@ -7,7 +7,7 @@
   <meta name="description" content="Premium Paint Protection Film (PPF) untuk melindungi cat mobil dari goresan, stone chip, dan noda. Self healing, high gloss, instalasi profesional.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=13">
+  <link rel="stylesheet" href="css/style.css?v=14">
   <script src="js/theme.js?v=5"></script>
 </head>
 <body>
@@ -98,7 +98,17 @@
           <h2 id="reviewsTitle">Apa Kata Klien Kami</h2>
           <p id="reviewsSub">Pengalaman nyata pemilik kendaraan premium yang mempercayakan proteksi cat mereka kepada kami.</p>
         </div>
-        <div class="reviews-grid" id="reviewsGrid"></div>
+        <div class="reviews-slider reveal">
+          <div class="reviews-grid" id="reviewsGrid"></div>
+          <div class="reviews-nav" id="reviewsNav">
+            <button type="button" class="rv-btn" id="reviewsPrev" aria-label="Testimoni sebelumnya">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button type="button" class="rv-btn" id="reviewsNext" aria-label="Testimoni berikutnya">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -227,6 +237,6 @@
   </div>
 
   <script src="js/data.js?v=6"></script>
-  <script src="js/main.js?v=9"></script>
+  <script src="js/main.js?v=10"></script>
 </body>
 </html>

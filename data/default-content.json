@@ -51,7 +51,7 @@
         "rating": "5",
         "comment": "Hasil pengerjaan sangat presisi dan rapi, sudut panel ditekuk ke dalam sehingga nyaris tidak terlihat ada sambungan film. Kilapnya luar biasa dan self-healing bekerja dengan sangat baik. Sangat puas dengan layanannya!",
         "date": "2026-09-15",
-        "avatar": ""
+        "avatar": "assets/hero.jpg"
       },
       {
         "name": "David Tan",
@@ -59,7 +59,7 @@
         "rating": "5",
         "comment": "Merubah tampilan mobil dari glossy jadi satin matte mewah sekaligus dapat perlindungan maksimal dari stone chip di tol. Pengerjaan cepat, tepat waktu, dan timnya sangat profesional serta komunikatif.",
         "date": "2026-08-28",
-        "avatar": ""
+        "avatar": "assets/suv.jpg"
       },
       {
         "name": "Reza Rahardian",
@@ -67,7 +67,7 @@
         "rating": "5",
         "comment": "Pelayanan jemput towing gratis sangat membantu. Pemasangan rapi tanpa gelembung atau bekas debu. Area bumper dan kap mesin terlindungi sempurna saat perjalanan luar kota. Highly recommended!",
         "date": "2026-08-10",
-        "avatar": ""
+        "avatar": "assets/ppf.jpg"
       }
     ]
   },

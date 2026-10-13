@@ -47,12 +47,11 @@
         key: 'items',
         label: 'Review',
         fields: [
-          ['name', 'Nama Klien / Pelanggan'],
-          ['car', 'Mobil / Layanan (cth: Porsche 911 — Full PPF)'],
+          ['avatar', 'Foto Pelanggan (disarankan foto serah terima / bersama mobil, rasio kotak 1:1 — kosongkan untuk inisial nama)', 'image'],
+          ['name', 'Nama Pelanggan'],
+          ['car', 'Mobil / Paket (tampil sebagai: Customer — PORSCHE 911 FULL PPF)'],
           ['rating', 'Rating Bintang', 'select', RATING_OPTIONS],
-          ['comment', 'Isi Ulasan / Testimonial', 'textarea'],
-          ['date', 'Tanggal Review', 'date'],
-          ['avatar', 'Foto Klien / Mobil (opsional, kosong = inisial)', 'image']
+          ['comment', 'Isi Testimoni', 'textarea']
         ]
       }
     },

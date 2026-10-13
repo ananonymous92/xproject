@@ -86,40 +86,64 @@
     } catch { return d; }
   };
 
-  // Reviews / Testimonials
+  // Reviews / Testimonials (foto pelanggan + slider)
   if (C.reviews) {
     if ($('reviewsTitle')) $('reviewsTitle').textContent = C.reviews.title || 'Apa Kata Klien Kami';
     if ($('reviewsSub')) $('reviewsSub').textContent = C.reviews.subtitle || '';
     const items = Array.isArray(C.reviews.items) ? C.reviews.items : [];
     const starsHtml = (r) => {
       const num = Math.min(5, Math.max(1, parseInt(r, 10) || 5));
-      return '★'.repeat(num) + '☆'.repeat(5 - num);
+      return '★'.repeat(num) + '<span class="r-star-off">' + '★'.repeat(5 - num) + '</span>';
     };
     const initials = (name = '') => name.trim().split(/\s+/).map((p) => p[0]).filter(Boolean).slice(0, 2).join('').toUpperCase() || 'X';
-    if ($('reviewsGrid')) {
-      $('reviewsGrid').innerHTML = items.map((rev) => {
-        const hasImg = !!rev.avatar;
-        const avatarEl = hasImg
-          ? `<img class="r-avatar" src="${esc(safeUrl(rev.avatar, ''))}" alt="${esc(rev.name)}" loading="lazy">`
-          : `<div class="r-avatar-initials">${esc(initials(rev.name))}</div>`;
-        const dateStr = rev.date ? fmt(rev.date) : '';
+    const track = $('reviewsGrid');
+    if (track) {
+      track.innerHTML = items.map((rev) => {
+        const photo = rev.avatar ? safeUrl(rev.avatar, '') : '';
+        const avatarEl = photo
+          ? `<button type="button" class="r-photo" aria-label="Lihat foto ${esc(rev.name)}"><img class="r-avatar" src="${esc(photo)}" alt="${esc(rev.name)}" loading="lazy"></button>`
+          : `<div class="r-avatar-initials" aria-hidden="true">${esc(initials(rev.name))}</div>`;
+        const rating = Math.min(5, Math.max(1, parseInt(rev.rating, 10) || 5));
         return `
-          <div class="review-card reveal">
-            <div class="r-header">
-              <div class="r-stars" aria-label="${rev.rating || 5} dari 5 bintang">${starsHtml(rev.rating)}</div>
-              ${dateStr ? `<time class="r-date">${esc(dateStr)}</time>` : ''}
-            </div>
-            <p class="r-comment">“${esc(rev.comment)}”</p>
+          <article class="review-card">
             <div class="r-author">
               ${avatarEl}
               <div class="r-info">
                 <strong class="r-name">${esc(rev.name)}</strong>
-                ${rev.car ? `<span class="r-car">${esc(rev.car)}</span>` : ''}
+                ${rev.car ? `<span class="r-car">Customer — <b>${esc(rev.car)}</b></span>` : '<span class="r-car">Customer</span>'}
               </div>
             </div>
-          </div>
+            <div class="r-stars" role="img" aria-label="${rating} dari 5 bintang">${starsHtml(rating)}</div>
+            <p class="r-comment">"${esc(rev.comment)}"</p>
+          </article>
         `;
       }).join('');
+
+      // Klik foto -> buka lightbox
+      track.addEventListener('click', (e) => {
+        const btn = e.target.closest('.r-photo'); if (!btn) return;
+        const img = btn.querySelector('img');
+        $('lbImg').src = img.src; $('lbCap').textContent = img.alt;
+        lb.classList.add('open');
+      });
+
+      // Slider prev / next
+      const prev = $('reviewsPrev'), next = $('reviewsNext'), nav = $('reviewsNav');
+      const step = () => {
+        const card = track.querySelector('.review-card');
+        return card ? card.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0) : track.clientWidth;
+      };
+      const update = () => {
+        const max = track.scrollWidth - track.clientWidth;
+        if (nav) nav.hidden = max <= 2;
+        if (prev) prev.disabled = track.scrollLeft <= 2;
+        if (next) next.disabled = track.scrollLeft >= max - 2;
+      };
+      prev?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+      next?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+      track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+      window.addEventListener('resize', update);
+      update();
     }
   }
 
