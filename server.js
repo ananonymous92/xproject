@@ -17,7 +17,23 @@ const UPLOAD_DIR = path.join(ROOT, 'uploads');
 const CONTENT_FILE = path.join(DATA_DIR, 'content.json');
 const DEFAULT_FILE = path.join(DATA_DIR, 'default-content.json');
 
-const PORT = Number(process.env.PORT) || 3000;
+// Otomatis muat file .env jika ada
+const envPath = path.join(ROOT, '.env');
+if (fs.existsSync(envPath)) {
+  const envContent = fs.readFileSync(envPath, 'utf8');
+  for (const line of envContent.split(/\r?\n/)) {
+    const m = line.trim();
+    if (!m || m.startsWith('#')) continue;
+    const eq = m.indexOf('=');
+    if (eq !== -1) {
+      const k = m.slice(0, eq).trim();
+      const v = m.slice(eq + 1).trim();
+      if (!process.env[k]) process.env[k] = v;
+    }
+  }
+}
+
+const PORT = Number(process.env.PORT) || 3005;
 const HOST = process.env.HOST || '127.0.0.1'; // di VPS: tetap 127.0.0.1, akses publik lewat Nginx
 const IS_PROD = process.env.NODE_ENV === 'production';
 const PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH || '';
