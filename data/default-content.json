@@ -1,0 +1,61 @@
+{
+  "brand": { "name": "X- Project", "logo": "", "whatsapp": "6281234567890", "waMessage": "Halo, saya ingin konsultasi mengenai Paint Protection Film." },
+  "hero": {
+    "image": "assets/hero.jpg",
+    "eyebrow": "Premium Paint Protection Film",
+    "headline": "Lindungi Cat Mobil Anda. Pertahankan Kilau Seperti Baru.",
+    "subheadline": "Premium Paint Protection Film untuk melindungi permukaan kendaraan dari goresan, stone chip, noda, dan berbagai risiko penggunaan sehari-hari.",
+    "cta1": "Konsultasi Sekarang",
+    "cta2": "Lihat Paket PPF",
+    "badges": "Premium Protection • Self Healing • High Gloss • Professional Installation"
+  },
+  "about": {
+    "image": "assets/ppf.jpg",
+    "title": "Apa Itu Paint Protection Film?",
+    "text": "Paint Protection Film (PPF) adalah lapisan film transparan khusus yang diaplikasikan pada permukaan cat kendaraan untuk membantu melindungi cat dari berbagai risiko penggunaan sehari-hari seperti stone chip, goresan ringan, noda, dan kontaminasi permukaan.",
+    "benefits": [
+      { "icon": "shield", "title": "Perlindungan Cat", "text": "Membantu melindungi permukaan cat dari goresan ringan dan stone chip." },
+      { "icon": "heal", "title": "Self Healing", "text": "Material tertentu dapat membantu menyamarkan goresan ringan ketika terkena panas." },
+      { "icon": "gloss", "title": "High Gloss", "text": "Mempertahankan tampilan kendaraan agar terlihat glossy dan premium." },
+      { "icon": "time", "title": "Perlindungan Jangka Panjang", "text": "Membantu menjaga kondisi cat kendaraan sehingga tampilannya tetap menarik." }
+    ]
+  },
+  "services": [
+    { "title": "Full Body PPF", "text": "Perlindungan menyeluruh untuk seluruh panel body kendaraan dengan hasil rapi dan nyaris tak terlihat." },
+    { "title": "Front Package PPF", "text": "Fokus pada area paling rawan: bumper depan, kap mesin, fender, dan spion." },
+    { "title": "Matte / Satin PPF", "text": "Ubah tampilan cat glossy menjadi matte atau satin elegan sambil tetap terlindungi." },
+    { "title": "Ceramic Coating", "text": "Lapisan hidrofobik untuk kilau maksimal dan perawatan yang lebih mudah." },
+    { "title": "Interior Protection", "text": "Perlindungan panel piano black, layar, dan area interior yang rentan baret." },
+    { "title": "Paint Correction", "text": "Koreksi swirl dan baret halus sebelum pemasangan untuk hasil sempurna." }
+  ],
+  "gallery": [
+    { "image": "assets/hero.jpg", "caption": "Full Body Gloss PPF — Sports Coupe" },
+    { "image": "assets/suv.jpg", "caption": "Full Body PPF — Luxury SUV" },
+    { "image": "assets/ppf.jpg", "caption": "Proses Instalasi Presisi" },
+    { "image": "assets/suv.jpg", "caption": "Ceramic Coating Finish" },
+    { "image": "assets/hero.jpg", "caption": "Front Package Protection" },
+    { "image": "assets/ppf.jpg", "caption": "Wet Install Technique" }
+  ],
+  "pricing": [
+    { "name": "Front Package", "price": "Mulai Rp 8,5 Jt", "features": "Bumper depan\nKap mesin\nFender depan\nSpion\nGaransi 5 tahun", "featured": false },
+    { "name": "Full Body Gloss", "price": "Mulai Rp 28 Jt", "features": "Seluruh panel body\nSelf healing film\nHigh gloss finish\nFree ceramic coating kaca\nGaransi 10 tahun", "featured": true },
+    { "name": "Full Body Matte", "price": "Mulai Rp 32 Jt", "features": "Seluruh panel body\nMatte / Satin finish\nSelf healing film\nFree interior protection\nGaransi 10 tahun", "featured": false }
+  ],
+  "location": {
+    "address": "Jl. Sudirman Kav. 52, Jakarta Selatan, DKI Jakarta 12190",
+    "hours": "Senin – Sabtu: 09.00 – 18.00 | Minggu: Dengan Janji",
+    "mapEmbed": "https://www.google.com/maps?q=Jakarta%20Selatan&output=embed"
+  },
+  "news": [
+    { "image": "assets/ppf.jpg", "date": "2026-09-20", "title": "PPF vs Ceramic Coating: Mana yang Tepat untuk Mobil Anda?", "text": "Pahami perbedaan fungsi, daya tahan, dan biaya keduanya sebelum memutuskan." },
+    { "image": "assets/suv.jpg", "date": "2026-09-05", "title": "5 Tips Merawat Mobil Setelah Pemasangan PPF", "text": "Langkah sederhana agar film tetap jernih dan glossy bertahun-tahun." },
+    { "image": "assets/hero.jpg", "date": "2026-08-18", "title": "Mengenal Teknologi Self Healing pada PPF", "text": "Bagaimana goresan halus bisa menghilang hanya dengan paparan panas." }
+  ],
+  "contact": { "phone": "+62 812-3456-7890", "email": "hello@xproject.id", "instagram": "https://instagram.com/xproject.id", "facebook": "https://facebook.com/xproject.id" },
+  "footer": {
+    "desc": "Spesialis Paint Protection Film (PPF) & auto detailing premium. Melindungi permukaan cat kendaraan dari goresan, stone chip, dan cuaca ekstrem dengan standar presisi tinggi.",
+    "facebook": "https://facebook.com/xproject.id",
+    "instagram": "https://instagram.com/xproject.id",
+    "copyright": "All rights reserved."
+  }
+}
