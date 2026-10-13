@@ -614,15 +614,17 @@ body.nav-open{overflow:hidden}
     margin-bottom:10px;
   }
   .hero h1{
-    font-size:clamp(1.82rem,7.4vw,2.35rem);
-    line-height:1.18;
+    font-size:clamp(1.72rem,6.8vw,2.2rem);
+    line-height:1.2;
     letter-spacing:-.5px;
     margin-bottom:14px;
+    overflow-wrap:break-word;
   }
   .hero-sub{
     font-size:.92rem;
     line-height:1.6;
     margin-bottom:24px;
+    overflow-wrap:break-word;
   }
   .hero-cta{
     display:flex;
@@ -636,22 +638,19 @@ body.nav-open{overflow:hidden}
     font-size:.95rem;
   }
   .hero-badges{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
+    display:flex;
+    flex-wrap:wrap;
     gap:8px;
     width:100%;
   }
   .hero-badges span{
-    display:flex;
+    display:inline-flex;
     align-items:center;
-    justify-content:center;
-    text-align:center;
-    font-size:.75rem;
-    padding:8px 6px;
+    font-size:.78rem;
+    padding:7px 13px;
     border-radius:999px;
+    max-width:100%;
     white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
   }
   .scroll-hint{
     display:none;
