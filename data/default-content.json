@@ -1,5 +1,5 @@
 {
-  "brand": { "name": "X- Project", "logo": "", "whatsapp": "6281234567890", "waMessage": "Halo, saya ingin konsultasi mengenai Paint Protection Film." },
+  "brand": { "name": "X- Project", "logo": "assets/logo.png", "whatsapp": "6281234567890", "waMessage": "Halo, saya ingin konsultasi mengenai Paint Protection Film." },
   "hero": {
     "image": "assets/hero.jpg",
     "eyebrow": "Premium Paint Protection Film",
