@@ -69,7 +69,7 @@
         ['mapUrl', 'Link Google Maps / Petunjuk Arah (opsional, cth: https://maps.app.goo.gl/... atau link Buka di Maps)']
       ]
     },
-    news: { title: 'News', list: { label: 'Artikel', fields: [['image', 'Gambar', 'image'], ['date', 'Tanggal', 'date'], ['title', 'Judul'], ['text', 'Ringkasan', 'textarea']] } },
+    news: { title: 'News', list: { label: 'Artikel', fields: [['image', 'Gambar', 'image'], ['date', 'Tanggal', 'date'], ['title', 'Judul'], ['text', 'Ringkasan Singkat', 'textarea'], ['content', 'Isi Lengkap Artikel (muncul saat artikel diklik)', 'textarea']] } },
     contact: { title: 'Contact', fields: [['phone', 'Telepon'], ['email', 'Email'], ['instagram', 'Instagram (Username / URL https)'], ['facebook', 'Facebook (Username / URL https)']] },
     footer: {
       title: 'Footer & Sosial Media',

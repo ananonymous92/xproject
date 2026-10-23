@@ -73,7 +73,12 @@
   });
   lb.addEventListener('click', () => lb.classList.remove('open'));
   $('lbClose')?.addEventListener('click', (e) => { e.stopPropagation(); lb.classList.remove('open'); });
-  document.addEventListener('keydown', (e) => e.key === 'Escape' && lb.classList.remove('open'));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      lb.classList.remove('open');
+      closeArticle?.();
+    }
+  });
 
   // Pricing
   $('pricing').innerHTML = C.pricing.map((p) => {
@@ -189,8 +194,86 @@
   }
   $('locDir').href = directionsUrl;
 
-  // News
-  $('newsGrid').innerHTML = C.news.map((n) => `<article class="post reveal"><div class="thumb"><img src="${esc(safeUrl(n.image, ''))}" alt="${esc(n.title)}" loading="lazy"></div><div class="body"><time>${fmt(n.date)}</time><h3>${esc(n.title)}</h3><p>${esc(n.text)}</p></div></article>`).join('');
+  // FAQ Accordion
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    const btn = item.querySelector('.faq-question');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach((other) => {
+        if (other !== item) {
+          other.classList.remove('active');
+          other.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+        }
+      });
+      item.classList.toggle('active', !isActive);
+      btn.setAttribute('aria-expanded', String(!isActive));
+    });
+  });
+
+  // News & Article Reader Modal
+  const artModal = $('articleModal');
+  const openArticle = (idx) => {
+    const item = C.news && C.news[idx];
+    if (!item || !artModal) return;
+    const imgEl = $('modalArticleImg');
+    if (imgEl) {
+      imgEl.src = safeUrl(item.image, '');
+      imgEl.alt = item.title || '';
+    }
+    if ($('modalArticleDate')) $('modalArticleDate').textContent = fmt(item.date);
+    if ($('modalArticleTitle')) $('modalArticleTitle').textContent = item.title;
+    if ($('modalArticleContent')) {
+      const bodyText = item.content || item.text || '';
+      $('modalArticleContent').textContent = bodyText;
+    }
+    if ($('modalArticleWa')) {
+      $('modalArticleWa').href = waUrl(`Halo ${C.brand.name}, saya baru membaca artikel "${item.title}". Saya ingin konsultasi lebih lanjut.`);
+    }
+    artModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeArticle = () => {
+    if (!artModal) return;
+    artModal.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  if ($('newsGrid')) {
+    $('newsGrid').innerHTML = C.news.map((n, i) => `
+      <article class="post reveal" data-news-idx="${i}" tabindex="0" role="button" aria-label="Baca artikel lengkap: ${esc(n.title)}">
+        <div class="thumb"><img src="${esc(safeUrl(n.image, ''))}" alt="${esc(n.title)}" loading="lazy"></div>
+        <div class="body">
+          <time>${fmt(n.date)}</time>
+          <h3>${esc(n.title)}</h3>
+          <p>${esc(n.text)}</p>
+          <span class="post-link">Baca Selengkapnya <span>&rarr;</span></span>
+        </div>
+      </article>
+    `).join('');
+
+    $('newsGrid').addEventListener('click', (e) => {
+      const card = e.target.closest('.post');
+      if (!card) return;
+      const idx = parseInt(card.getAttribute('data-news-idx'), 10);
+      if (!isNaN(idx)) openArticle(idx);
+    });
+    $('newsGrid').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const card = e.target.closest('.post');
+        if (!card) return;
+        e.preventDefault();
+        const idx = parseInt(card.getAttribute('data-news-idx'), 10);
+        if (!isNaN(idx)) openArticle(idx);
+      }
+    });
+  }
+
+  $('articleModalClose')?.addEventListener('click', closeArticle);
+  $('articleModalBackdrop')?.addEventListener('click', closeArticle);
+  artModal?.addEventListener('click', (e) => {
+    if (e.target === artModal) closeArticle();
+  });
 
   // Helpers for social media URLs
   const toUrl = (type, val) => {

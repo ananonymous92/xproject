@@ -1,5 +1,5 @@
 {
-  "brand": { "name": "X- Project", "logo": "assets/logo.png", "whatsapp": "6281234567890", "waMessage": "Halo, saya ingin konsultasi mengenai Paint Protection Film." },
+  "brand": { "name": "X- Project", "logo": "assets/logo.png", "whatsapp": "6282114046393", "waMessage": "Halo, saya ingin konsultasi mengenai Paint Protection Film." },
   "hero": {
     "image": "assets/hero.jpg",
     "eyebrow": "Premium Paint Protection Film",
@@ -38,7 +38,7 @@
   ],
   "pricing": [
     { "name": "Front Package", "price": "Mulai Rp 8,5 Jt", "originalPrice": "Rp 12 Jt", "features": "Bumper depan\nKap mesin\nFender depan\nSpion\nGaransi 5 tahun", "featured": false },
-    { "name": "Full Body Gloss", "price": "Mulai Rp 28 Jt", "originalPrice": "Rp 35 Jt", "features": "Seluruh panel body\nSelf healing film\nHigh gloss finish\nFree ceramic coating kaca\nGaransi 10 tahun", "featured": true },
+    { "name": "Full Body Gloss", "price": "Mulai Rp 28 Jt", "originalPrice": "Rp 35 Jt", "features": "Seluruh panel body\nSelf healing film (8.5 mil)\nHigh gloss finish\nFree ceramic coating kaca\nGaransi 10 tahun", "featured": true },
     { "name": "Full Body Matte", "price": "Mulai Rp 32 Jt", "originalPrice": "Rp 40 Jt", "features": "Seluruh panel body\nMatte / Satin finish\nSelf healing film\nFree interior protection\nGaransi 10 tahun", "featured": false }
   ],
   "reviews": {
@@ -72,17 +72,35 @@
     ]
   },
   "location": {
-    "address": "Jl. Sudirman Kav. 52, Jakarta Selatan, DKI Jakarta 12190",
+    "address": "Jalan Thamrin Boulevard 2, PIK 2 (Kosambi, Tangerang)",
     "hours": "Senin – Sabtu: 09.00 – 18.00 | Minggu: Dengan Janji",
-    "mapEmbed": "https://www.google.com/maps?q=Jakarta%20Selatan&output=embed",
-    "mapUrl": ""
+    "mapEmbed": "https://www.google.com/maps?q=Jalan%20Thamrin%20Boulevard%202%2C%20PIK%202%2C%20Kosambi%2C%20Tangerang&output=embed",
+    "mapUrl": "https://maps.google.com/?q=Jalan+Thamrin+Boulevard+2,+PIK+2,+Kosambi,+Tangerang"
   },
   "news": [
-    { "image": "assets/ppf.jpg", "date": "2026-09-20", "title": "PPF vs Ceramic Coating: Mana yang Tepat untuk Mobil Anda?", "text": "Pahami perbedaan fungsi, daya tahan, dan biaya keduanya sebelum memutuskan." },
-    { "image": "assets/suv.jpg", "date": "2026-09-05", "title": "5 Tips Merawat Mobil Setelah Pemasangan PPF", "text": "Langkah sederhana agar film tetap jernih dan glossy bertahun-tahun." },
-    { "image": "assets/hero.jpg", "date": "2026-08-18", "title": "Mengenal Teknologi Self Healing pada PPF", "text": "Bagaimana goresan halus bisa menghilang hanya dengan paparan panas." }
+    {
+      "image": "assets/ppf.jpg",
+      "date": "2026-09-20",
+      "title": "PPF vs Ceramic Coating: Mana yang Tepat untuk Mobil Anda?",
+      "text": "Pahami perbedaan fungsi, daya tahan, dan biaya keduanya sebelum memutuskan.",
+      "content": "Banyak pemilik kendaraan sering bingung memilih antara Paint Protection Film (PPF) dan Ceramic Coating. Keduanya memang sama-sama ditujukan untuk melindungi cat mobil, namun memiliki fungsi inti yang sangat berbeda.\n\n1. Bentuk Perlindungan Fisik vs Kimiawi\nPPF adalah lapisan film transparan berbasis Thermoplastic Polyurethane (TPU) setebal 8.5 mil yang bertindak layaknya baju zirah. PPF dirancang khusus untuk menahan benturan fisik seperti lontaran kerikil (stone chips), goresan ranting, hingga gesekan di area parkir. Sementara Ceramic Coating adalah cairan silika/keramik yang mengikat secara molekuler dengan pori-pori pernis cat, menciptakan efek hidrofobik (daun talas) dan kilau tinggi, namun tidak mampu menahan benturan fisik kerikil tajam.\n\n2. Kemampuan Self-Healing\nSalah satu keunggulan terbesar PPF X-Project adalah teknologi self-healing. Baret-baret halus atau swirl mark akibat cuci mobil akan hilang dengan sendirinya saat terkena paparan sinar matahari atau air hangat. Ceramic coating tidak memiliki elastisitas ini; jika tergores, lapisan keramik harus dipoles kembali.\n\n3. Kombinasi Terbaik\nKombinasi paling ideal yang kami sarankan adalah memasang PPF pada panel body (terutama area rawan benturan), kemudian melapisi kaca dan permukaan film dengan Ceramic Coating khusus film untuk mempermudah pencucian dan memberikan kilap maksimal.\n\nKonsultasikan kebutuhan mobil Anda bersama tim ahli X-Project untuk mendapatkan rekomendasi paket perlindungan paling tepat."
+    },
+    {
+      "image": "assets/suv.jpg",
+      "date": "2026-09-05",
+      "title": "5 Tips Merawat Mobil Setelah Pemasangan PPF",
+      "text": "Langkah sederhana agar film tetap jernih dan glossy bertahun-tahun.",
+      "content": "Setelah memasang Paint Protection Film (PPF) berkualitas premium, perawatan yang tepat akan memastikan film Anda tetap jernih, elastis, dan berkilau optimal selama masa garansi 10 tahun. Berikut 5 tips penting dari tim ahli X-Project:\n\n1. Hindari Mencuci Mobil Selama 7 Hari Pertama\nBiarkan lem perekat film (curing process) menempel sempurna ke permukaan cat. Jangan cuci mobil atau terkena tekanan air tinggi selama minimal satu minggu setelah pemasangan.\n\n2. Perhatikan Jarak Cuci Steam / Pressure Washer\nSaat mencuci menggunakan air bertekanan tinggi, jaga jarak nozzle minimal 30–50 cm dari permukaan film. Hindari menyemprotkan air bertekanan langsung tegak lurus ke arah ujung atau sambungan tepi film agar lem tidak terangkat.\n\n3. Bersihkan Segera Noda Organik\nKotoran burung, getah pohon, dan cipratan aspal mengandung asam kuat. Walaupun PPF memiliki proteksi noda tinggi, segera basuh noda tersebut menggunakan air bersih dan microfiber halus sebelum mengering dan mengikis lapisan atas.\n\n4. Gunakan Shampo Mobil Ber-pH Netral\nGunakan selalu shampo mobil berkualitas dengan formula pH netral. Hindari deterjen keras, zat kimia asam, atau cairan pengilap berbasis petroleum yang dapat mempercepat degradasi material polyurethane.\n\n5. Jadwalkan Kontrol & Maintenance Berkala\nManfaatkan garansi resmi X-Project untuk melakukan pemeriksaan tepi film, pembersihan kerak air, serta re-coating ringan setiap 6 hingga 12 bulan di studio kami di PIK 2."
+    },
+    {
+      "image": "assets/hero.jpg",
+      "date": "2026-08-18",
+      "title": "Mengenal Teknologi Self Healing pada PPF",
+      "text": "Bagaimana goresan halus bisa menghilang hanya dengan paparan panas.",
+      "content": "Salah satu fitur paling memukau dari Paint Protection Film (PPF) generasi terbaru adalah kemampuannya menyembuhkan dirinya sendiri (self-healing). Fitur ini membuat mobil selalu tampak mulus seperti baru keluar dari showroom tanpa perlu berulang kali melakukan salon atau paint correction.\n\n1. Apa Rahasia di Balik Self-Healing?\nPPF premium X-Project menggunakan material Thermoplastic Polyurethane (TPU) dengan lapisan elastisitas memori (elastomeric polymer) pada bagian paling atas (top coat). Rantai polimer ini memiliki ikatan silang fleksibel yang dapat kembali ke posisi semula setelah tergesek atau berubah bentuk.\n\n2. Bagaimana Panas Mengaktifkannya?\nKetika baret halus atau goresan mikro terjadi, polimer lapisan atas sedikit terdesak. Ketika terkena panas—baik dari sinar terik matahari siang hari, air hangat, maupun hembusan heat gun—ikatan polimer akan melunak dan kembali merapat secara natural, menutup goresan tersebut tanpa meninggalkan jejak.\n\n3. Batasan Self-Healing\nPenting untuk dipahami bahwa self-healing bekerja sangat efektif untuk baret halus, swirl mark, dan goresan ringan. Namun, jika benturan terlalu dalam hingga merobek lembaran TPU 8.5 mil tersebut, lapisan cat asli Anda tetap terlindungi di bawahnya, dan bagian panel yang rusak dapat diganti per panel tanpa harus mengecat ulang seluruh mobil.\n\nIngin membuktikan langsung teknologi self-healing kami? Kunjungi studio X-Project di Thamrin Boulevard 2, PIK 2 untuk demonstrasi langsung pada panel uji coba!"
+    }
   ],
-  "contact": { "phone": "+62 812-3456-7890", "email": "hello@xproject.id", "instagram": "https://instagram.com/xproject.id", "facebook": "https://facebook.com/xproject.id" },
+  "contact": { "phone": "+62 821-1404-6393", "email": "hello@xproject.id", "instagram": "https://instagram.com/xproject.id", "facebook": "https://facebook.com/xproject.id" },
   "footer": {
     "desc": "Spesialis Paint Protection Film (PPF) & auto detailing premium. Melindungi permukaan cat kendaraan dari goresan, stone chip, dan cuaca ekstrem dengan standar presisi tinggi.",
     "facebook": "https://facebook.com/xproject.id",
