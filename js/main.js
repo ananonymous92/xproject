@@ -42,6 +42,17 @@
 
   // Hero
   $('heroBg').style.backgroundImage = `url("${safeUrl(C.hero.image, '').replace(/["\\]/g, '')}")`;
+  const heroVid = $('heroVideo');
+  if (heroVid) {
+    if (C.hero.video && safeUrl(C.hero.video, '') !== '') {
+      heroVid.src = safeUrl(C.hero.video);
+      heroVid.poster = safeUrl(C.hero.image, 'assets/hero.jpg');
+      heroVid.onloadeddata = () => heroVid.classList.add('loaded');
+      heroVid.onerror = () => { heroVid.style.display = 'none'; };
+    } else {
+      heroVid.style.display = 'none';
+    }
+  }
   $('heroEyebrow').textContent = C.hero.eyebrow;
   $('heroHeadline').textContent = C.hero.headline;
   $('heroSub').textContent = C.hero.subheadline;
@@ -194,7 +205,53 @@
   }
   $('locDir').href = directionsUrl;
 
-  // FAQ Accordion
+  // FAQ Section (Dynamic from C.faq)
+  if (C.faq) {
+    if ($('faqEyebrow')) $('faqEyebrow').textContent = C.faq.eyebrow || 'Tanya Jawab';
+    if ($('faqTitle')) $('faqTitle').textContent = C.faq.title || 'Pertanyaan yang Sering Diajukan';
+    if ($('faqSub')) $('faqSub').textContent = C.faq.subtitle || '';
+
+    const acc = $('faqAccordion');
+    if (acc && Array.isArray(C.faq.items) && C.faq.items.length > 0) {
+      acc.innerHTML = C.faq.items.map((it, i) => `
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false" id="faqBtn${i}">
+            <span>${esc(it.q)}</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>${esc(it.a).replace(/\n/g, '<br>')}</p>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Dynamic sync with JSON-LD FAQPage schema
+      try {
+        const ldScript = document.querySelector('script[type="application/ld+json"]');
+        if (ldScript) {
+          const ldData = JSON.parse(ldScript.textContent);
+          if (Array.isArray(ldData['@graph'])) {
+            const faqEntity = ldData['@graph'].find((item) => item['@type'] === 'FAQPage');
+            if (faqEntity) {
+              faqEntity.mainEntity = C.faq.items.map((it) => ({
+                '@type': 'Question',
+                'name': it.q,
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': it.a
+                }
+              }));
+              ldScript.textContent = JSON.stringify(ldData, null, 2);
+            }
+          }
+        }
+      } catch {}
+    }
+  }
+
+  // FAQ Accordion click event listeners
   document.querySelectorAll('.faq-item').forEach((item) => {
     const btn = item.querySelector('.faq-question');
     if (!btn) return;

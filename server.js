@@ -63,6 +63,7 @@ function writeContent(data) {
 /* ---------------- Sanitizer (whitelist berdasarkan struktur default) ---------------- */
 const MAX_STR = 5000, MAX_ITEMS = 60;
 const LOCAL_IMG = /^(assets|uploads)\/[A-Za-z0-9._-]+\.(jpe?g|png|webp|gif)$/i;
+const LOCAL_MEDIA = /^(assets|uploads)\/[A-Za-z0-9._-]+\.(jpe?g|png|webp|gif|mp4|webm)$/i;
 const HANDLE = /^@?[A-Za-z0-9._]{1,60}$/;
 const isHttps = (s) => { try { return new URL(s).protocol === 'https:'; } catch { return false; } };
 const ALLOWED_ICONS = new Set([
@@ -75,9 +76,12 @@ const ALLOWED_ICONS = new Set([
 function cleanField(key, val, fallback) {
   const s = String(val).slice(0, MAX_STR).trim();
   switch (key) {
-    case 'image': case 'logo': case 'avatar':
+    case 'image': case 'logo': case 'avatar': case 'thumbnail':
       if (s === '' && (key === 'logo' || key === 'avatar')) return '';
-      return LOCAL_IMG.test(s) || isHttps(s) ? s : fallback;
+      return LOCAL_MEDIA.test(s) || isHttps(s) ? s : fallback;
+    case 'video': case 'videoUrl':
+      if (s === '') return '';
+      return LOCAL_MEDIA.test(s) || isHttps(s) ? s : fallback;
     case 'mapEmbed': {
       let raw = s;
       const m = raw.match(/src=["'](https:\/\/[^"']+)["']/i);
@@ -169,7 +173,8 @@ app.use(helmet({
       'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
       'font-src': ["'self'", 'https://fonts.gstatic.com'],
       'img-src': ["'self'", 'data:', 'https:'],
-      'frame-src': ['https://www.google.com', 'https://maps.google.com'],
+      'media-src': ["'self'", 'https:', 'blob:', 'data:'],
+      'frame-src': ['https://www.google.com', 'https://maps.google.com', 'https://www.youtube.com', 'https://www.youtube-nocookie.com', 'https://player.vimeo.com', 'https://www.instagram.com', 'https://instagram.com'],
       'connect-src': ["'self'"],
       'form-action': ["'self'"],
       'frame-ancestors': ["'none'"],
@@ -245,6 +250,8 @@ app.use('/uploads', express.static(UPLOAD_DIR, staticOpts));
 app.get('/favicon.ico', (req, res) => res.sendFile(path.join(ROOT, 'assets', 'favicon.ico')));
 app.get('/index.html', (req, res) => res.redirect(301, '/'));
 app.get('/', (req, res) => res.sendFile(path.join(ROOT, 'index.html')));
+app.get('/video.html', (req, res) => res.redirect(301, '/video'));
+app.get('/video', (req, res) => res.sendFile(path.join(ROOT, 'video.html')));
 app.get('/admin.html', (req, res) => { res.setHeader('X-Robots-Tag', 'noindex, nofollow'); res.sendFile(path.join(ROOT, 'admin.html')); });
 
 app.use((req, res) => res.status(404).send('Not found'));

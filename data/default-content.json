@@ -2,6 +2,7 @@
   "brand": { "name": "X- Project", "logo": "assets/logo.png", "whatsapp": "6282114046393", "waMessage": "Halo, saya ingin konsultasi mengenai Paint Protection Film." },
   "hero": {
     "image": "assets/hero.jpg",
+    "video": "",
     "eyebrow": "Premium Paint Protection Film",
     "headline": "Lindungi Cat Mobil Anda. Pertahankan Kilau Seperti Baru.",
     "subheadline": "Premium Paint Protection Film untuk melindungi permukaan kendaraan dari goresan, stone chip, noda, dan berbagai risiko penggunaan sehari-hari.",
@@ -71,6 +72,33 @@
       }
     ]
   },
+  "faq": {
+    "eyebrow": "Tanya Jawab",
+    "title": "Pertanyaan yang Sering Diajukan",
+    "subtitle": "Jawaban lengkap seputar proteksi Paint Protection Film, fasilitas, garansi, dan promo di X-Project.",
+    "items": [
+      {
+        "q": "Berapa ketebalan PPF di X-Project?",
+        "a": "X-Project menggunakan Paint Protection Film (PPF) TPU premium dengan ketebalan 8.5 mil (sekitar 215 mikron). Ketebalan ini memberikan daya tahan superior terhadap lontaran kerikil (stone chips), goresan ranting, serta paparan zat kimia dan panas ekstrem tanpa mengurangi kejernihan dan kilau warna asli kendaraan."
+      },
+      {
+        "q": "Apakah dapat fasilitas Free Towing?",
+        "a": "Ya, tentu! Kami menyediakan fasilitas Free Towing (layanan antar-jemput mobil) hingga 2x untuk pengerjaan Full Body PPF di area Jabodetabek. Mobil Anda diangkut secara eksklusif dan aman langsung ke studio kami di PIK 2 dan diantar kembali ke rumah Anda setelah proses selesai."
+      },
+      {
+        "q": "Berapa lama garansi PPF di X-Project?",
+        "a": "Kami memberikan garansi resmi hingga 10 tahun untuk paket Full Body PPF dan 5 tahun untuk paket Front Package. Garansi ini mencakup perlindungan penuh terhadap penguningan (yellowing), retak (cracking), gelembung (bubbling), film mengelupas di bagian sudut panel (peeling), serta performa self-healing."
+      },
+      {
+        "q": "Apa saja bonus USP yang didapat saat pasang PPF Full Body?",
+        "a": "Setiap pengerjaan Full Body PPF di X-Project berhak memperoleh paket bonus lengkap bernilai jutaan rupiah, antara lain: Free Carpet Set Promate eksklusif, Free Ceramic Coating untuk seluruh bidang kaca mobil, proteksi panel interior piano black, serta pemasangan di ruang steril berstandar suhu terkontrol."
+      },
+      {
+        "q": "Bagaimana cara kerja teknologi Self Healing pada PPF?",
+        "a": "Material TPU kelas atas pada PPF kami memiliki mantel mikro (top coat) berbasis polimer memori elastis. Baret halus akibat lap cuci mobil atau gesekan ranting akan merapat dan hilang dengan sendirinya ketika terkena paparan sinar terik matahari atau siraman air hangat tanpa perlu dipoles ulang."
+      }
+    ]
+  },
   "location": {
     "address": "Jalan Thamrin Boulevard 2, PIK 2 (Kosambi, Tangerang)",
     "hours": "Senin – Sabtu: 09.00 – 18.00 | Minggu: Dengan Janji",
@@ -100,6 +128,79 @@
       "content": "Salah satu fitur paling memukau dari Paint Protection Film (PPF) generasi terbaru adalah kemampuannya menyembuhkan dirinya sendiri (self-healing). Fitur ini membuat mobil selalu tampak mulus seperti baru keluar dari showroom tanpa perlu berulang kali melakukan salon atau paint correction.\n\n1. Apa Rahasia di Balik Self-Healing?\nPPF premium X-Project menggunakan material Thermoplastic Polyurethane (TPU) dengan lapisan elastisitas memori (elastomeric polymer) pada bagian paling atas (top coat). Rantai polimer ini memiliki ikatan silang fleksibel yang dapat kembali ke posisi semula setelah tergesek atau berubah bentuk.\n\n2. Bagaimana Panas Mengaktifkannya?\nKetika baret halus atau goresan mikro terjadi, polimer lapisan atas sedikit terdesak. Ketika terkena panas—baik dari sinar terik matahari siang hari, air hangat, maupun hembusan heat gun—ikatan polimer akan melunak dan kembali merapat secara natural, menutup goresan tersebut tanpa meninggalkan jejak.\n\n3. Batasan Self-Healing\nPenting untuk dipahami bahwa self-healing bekerja sangat efektif untuk baret halus, swirl mark, dan goresan ringan. Namun, jika benturan terlalu dalam hingga merobek lembaran TPU 8.5 mil tersebut, lapisan cat asli Anda tetap terlindungi di bawahnya, dan bagian panel yang rusak dapat diganti per panel tanpa harus mengecat ulang seluruh mobil.\n\nIngin membuktikan langsung teknologi self-healing kami? Kunjungi studio X-Project di Thamrin Boulevard 2, PIK 2 untuk demonstrasi langsung pada panel uji coba!"
     }
   ],
+  "videos": {
+    "eyebrow": "Cinema Vault & Showcase",
+    "title": "Keahlian Presisi & Bukti Nyata dalam Gerakan",
+    "subtitle": "Saksikan proses pemasangan Paint Protection Film di ruang steril, uji ketahanan self-healing, dan kilau kendaraan mewah klien kami.",
+    "items": [
+      {
+        "title": "Full Body Gloss PPF 8.5 mil — Porsche 911 GT3",
+        "category": "process",
+        "categoryLabel": "Craftsmanship",
+        "car": "Porsche 911 GT3",
+        "duration": "02:45",
+        "thumbnail": "assets/hero.jpg",
+        "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "description": "Proses instalasi menyeluruh PPF TPU 8.5 mil dengan teknik lipatan sudut panel ke dalam tanpa sambungan yang terlihat di studio X-Project PIK 2.",
+        "featured": true
+      },
+      {
+        "title": "Demonstrasi Uji Ketahanan & Self-Healing PPF",
+        "category": "tests",
+        "categoryLabel": "Uji Ketahanan",
+        "car": "Panel Uji Eksperimen",
+        "duration": "01:15",
+        "thumbnail": "assets/ppf.jpg",
+        "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "description": "Pengujian goresan sikat kawat dan gesekan tajam yang hilang seketika saat terkena paparan hawa panas suhu 60°C.",
+        "featured": false
+      },
+      {
+        "title": "Transformasi Satin Matte Mewah — BMW M4 Competition",
+        "category": "results",
+        "categoryLabel": "Hasil Akhir",
+        "car": "BMW M4 Competition",
+        "duration": "02:10",
+        "thumbnail": "assets/suv.jpg",
+        "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "description": "Perubahan tampilan dramatis dari cat metallic gloss menjadi satin matte mewah dengan perlindungan total dari stone chip jalan tol.",
+        "featured": false
+      },
+      {
+        "title": "Instalasi Presisi Front Package — Hyundai Ioniq 5",
+        "category": "process",
+        "categoryLabel": "Craftsmanship",
+        "car": "Hyundai Ioniq 5",
+        "duration": "01:50",
+        "thumbnail": "assets/ppf.jpg",
+        "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "description": "Perlindungan maksimal bumper depan, kap mesin, dan fender sebelum perjalanan luar kota bebas khawatir dari lontaran kerikil.",
+        "featured": false
+      },
+      {
+        "title": "Extreme Hydrophobic & High Gloss Finish Reflection",
+        "category": "results",
+        "categoryLabel": "Hasil Akhir",
+        "car": "Luxury Sports Coupe",
+        "duration": "00:58",
+        "thumbnail": "assets/hero.jpg",
+        "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "description": "Efek daun talas hidrofobik ekstrem setelah aplikasi kombinasi PPF TPU 8.5 mil dan lapisan ceramic coating khusus film.",
+        "featured": false
+      },
+      {
+        "title": "Behind the Scenes: Wet Install & Ruang Steril PIK 2",
+        "category": "shorts",
+        "categoryLabel": "Shorts / Reels",
+        "car": "Studio PIK 2",
+        "duration": "00:45",
+        "thumbnail": "assets/suv.jpg",
+        "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "description": "Kilasan proses persiapan ruang steril bertemperatur sejuk bebas debu demi hasil pemasangan jernih tanpa gelembung kotoran.",
+        "featured": false
+      }
+    ]
+  },
   "contact": { "phone": "+62 821-1404-6393", "email": "hello@xproject.id", "instagram": "https://instagram.com/xproject.id", "facebook": "https://facebook.com/xproject.id" },
   "footer": {
     "desc": "Spesialis Paint Protection Film (PPF) & auto detailing premium. Melindungi permukaan cat kendaraan dari goresan, stone chip, dan cuaca ekstrem dengan standar presisi tinggi.",

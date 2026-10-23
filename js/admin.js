@@ -33,10 +33,17 @@
     { value: '1', label: '⭐ (1 Bintang)' }
   ];
 
+  const VIDEO_CATEGORY_OPTIONS = [
+    { value: 'process', label: '🛡️ Craftsmanship & Proses (Pemasangan Presisi)' },
+    { value: 'tests', label: '🔥 Uji Ketahanan & Self-Healing' },
+    { value: 'results', label: '✨ Transformasi & Hasil Kilap Akhir' },
+    { value: 'shorts', label: '📱 Shorts & Reels (Format Vertikal)' }
+  ];
+
   // Field schema per tab. type: text | textarea | image | bool | select
   const SCHEMA = {
     brand: { title: 'Brand & Logo', fields: [['name', 'Nama Bisnis'], ['logo', 'Logo (kosongkan untuk logo teks)', 'image'], ['whatsapp', 'Nomor WhatsApp (format 628xxx)'], ['waMessage', 'Pesan Default WhatsApp', 'textarea']] },
-    hero: { title: 'Hero / Banner', fields: [['image', 'Gambar Hero', 'image'], ['eyebrow', 'Label Kecil'], ['headline', 'Headline', 'textarea'], ['subheadline', 'Subheadline', 'textarea'], ['cta1', 'Teks Tombol 1'], ['cta2', 'Teks Tombol 2'], ['badges', 'Badge (pisahkan dengan •)']] },
+    hero: { title: 'Hero / Banner', fields: [['image', 'Gambar Hero (Fallback / Poster)', 'image'], ['video', 'Video Banner Hero (URL MP4 / file lokal — opsional, jika kosong menampilkan gambar di atas)'], ['eyebrow', 'Label Kecil'], ['headline', 'Headline', 'textarea'], ['subheadline', 'Subheadline', 'textarea'], ['cta1', 'Teks Tombol 1'], ['cta2', 'Teks Tombol 2'], ['badges', 'Badge (pisahkan dengan •)']] },
     about: { title: 'Apa Itu PPF', fields: [['image', 'Gambar', 'image'], ['title', 'Judul'], ['text', 'Deskripsi', 'textarea']],
       list: { key: 'benefits', label: 'Benefit', fields: [['icon', 'Pilihan Ikon', 'select', ICON_OPTIONS], ['title', 'Judul'], ['text', 'Deskripsi', 'textarea']] } },
     services: { title: 'Layanan', list: { label: 'Layanan', fields: [['title', 'Judul'], ['text', 'Deskripsi', 'textarea']] } },
@@ -60,6 +67,22 @@
         ]
       }
     },
+    faq: {
+      title: 'Tanya Jawab (FAQ)',
+      fields: [
+        ['eyebrow', 'Label Kecil Header'],
+        ['title', 'Judul Section FAQ'],
+        ['subtitle', 'Subjudul / Keterangan', 'textarea']
+      ],
+      list: {
+        key: 'items',
+        label: 'Tanya Jawab',
+        fields: [
+          ['q', 'Pertanyaan'],
+          ['a', 'Jawaban Lengkap', 'textarea']
+        ]
+      }
+    },
     location: {
       title: 'Location',
       fields: [
@@ -68,6 +91,28 @@
         ['mapEmbed', 'URL Embed Google Maps (iframe src https://www.google.com/maps...)'],
         ['mapUrl', 'Link Google Maps / Petunjuk Arah (opsional, cth: https://maps.app.goo.gl/... atau link Buka di Maps)']
       ]
+    },
+    videos: {
+      title: 'Galeri Video',
+      fields: [
+        ['eyebrow', 'Label Kecil Header'],
+        ['title', 'Judul Section Video'],
+        ['subtitle', 'Subjudul / Keterangan', 'textarea']
+      ],
+      list: {
+        key: 'items',
+        label: 'Video',
+        fields: [
+          ['thumbnail', 'Cover Thumbnail (gambar)', 'image'],
+          ['videoUrl', 'URL Video (Instagram Reel / YouTube / Shorts / Vimeo / file MP4)'],
+          ['title', 'Judul Video'],
+          ['car', 'Tipe Mobil / Objek (misal: Porsche 911 GT3)'],
+          ['category', 'Kategori', 'select', VIDEO_CATEGORY_OPTIONS],
+          ['duration', 'Durasi (cth: 02:45)'],
+          ['description', 'Deskripsi Singkat', 'textarea'],
+          ['featured', 'Jadikan Video Utama (Featured Spotlight)', 'bool']
+        ]
+      }
     },
     news: { title: 'News', list: { label: 'Artikel', fields: [['image', 'Gambar', 'image'], ['date', 'Tanggal', 'date'], ['title', 'Judul'], ['text', 'Ringkasan Singkat', 'textarea'], ['content', 'Isi Lengkap Artikel (muncul saat artikel diklik)', 'textarea']] } },
     contact: { title: 'Contact', fields: [['phone', 'Telepon'], ['email', 'Email'], ['instagram', 'Instagram (Username / URL https)'], ['facebook', 'Facebook (Username / URL https)']] },
