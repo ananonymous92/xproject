@@ -248,6 +248,8 @@ app.use('/js', express.static(path.join(ROOT, 'js'), staticOpts));
 app.use('/assets', express.static(path.join(ROOT, 'assets'), staticOpts));
 app.use('/uploads', express.static(UPLOAD_DIR, staticOpts));
 app.get('/favicon.ico', (req, res) => res.sendFile(path.join(ROOT, 'assets', 'favicon.ico')));
+app.get('/robots.txt', (req, res) => res.sendFile(path.join(ROOT, 'robots.txt')));
+app.get('/sitemap.xml', (req, res) => { res.setHeader('Content-Type', 'application/xml'); res.sendFile(path.join(ROOT, 'sitemap.xml')); });
 app.get('/index.html', (req, res) => res.redirect(301, '/'));
 app.get('/', (req, res) => res.sendFile(path.join(ROOT, 'index.html')));
 app.get('/video.html', (req, res) => res.redirect(301, '/video'));

@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Allow: /favicon.ico
+Allow: /assets/
+Disallow: /admin.html
+Disallow: /api/
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /favicon.ico
+Allow: /assets/
+
+Sitemap: https://www.xprojectppf.id/sitemap.xml
