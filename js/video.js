@@ -25,13 +25,19 @@
 
   // Parse video source helper (YouTube, YouTube Shorts, Vimeo, direct MP4)
   function parseVideo(raw = '') {
-    const s = String(raw).trim();
-    // YouTube
+    let s = String(raw).trim();
+    // Jika user paste kode embed iframe utuh
+    const ifr = s.match(/src=["'](https:\/\/[^"']+)["']/i);
+    if (ifr) s = ifr[1];
+
+    // YouTube (watch, embed, shorts, youtu.be)
     const yt = s.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/i);
     if (yt) {
+      const origin = typeof location !== 'undefined' && location.origin ? `&origin=${encodeURIComponent(location.origin)}` : '';
       return {
         type: 'youtube',
-        embedUrl: `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1&rel=0&modestbranding=1`,
+        id: yt[1],
+        embedUrl: `https://www.youtube.com/embed/${yt[1]}?autoplay=1&rel=0&enablejsapi=1${origin}`,
         fallbackThumb: `https://img.youtube.com/vi/${yt[1]}/maxresdefault.jpg`
       };
     }
@@ -69,9 +75,20 @@
     return;
   }
 
-  // Featured video (cari yang featured: true, atau ambil pertama)
-  const featIndex = rawVideos.findIndex((v) => v.featured);
-  const featured = featIndex !== -1 ? rawVideos[featIndex] : rawVideos[0];
+  // Sinkronisasi categoryLabel fallback
+  const CAT_LABELS = {
+    process: 'Craftsmanship',
+    tests: 'Uji Ketahanan',
+    results: 'Hasil Akhir',
+    shorts: 'Shorts & Reels'
+  };
+  rawVideos.forEach((v) => {
+    if (!v.categoryLabel) v.categoryLabel = CAT_LABELS[v.category] || 'Video';
+  });
+
+  // Featured video (cari yang featured: true, prioritaskan yang terakhir jika ada beberapa)
+  const featuredList = rawVideos.filter((v) => v.featured);
+  const featured = featuredList.length > 0 ? featuredList[featuredList.length - 1] : rawVideos[0];
 
   if (featured && $('vFeaturedWrap')) {
     if ($('vFeatImg')) $('vFeatImg').src = safeUrl(featured.thumbnail, 'assets/hero.jpg');
@@ -179,7 +196,7 @@
       } else {
         playerBox.classList.remove('is-instagram');
         if (parsed.type === 'youtube' || parsed.type === 'vimeo') {
-          playerBox.innerHTML = `<iframe src="${esc(parsed.embedUrl)}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen title="${esc(item.title)}"></iframe>`;
+          playerBox.innerHTML = `<iframe src="${esc(parsed.embedUrl)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="${esc(item.title)}"></iframe>`;
         } else if (parsed.type === 'html5' && parsed.embedUrl) {
           playerBox.innerHTML = `<video src="${esc(parsed.embedUrl)}" controls autoplay playsinline></video>`;
         } else {

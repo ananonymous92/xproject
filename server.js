@@ -182,6 +182,7 @@ app.use(helmet({
       'upgrade-insecure-requests': IS_PROD ? [] : null
     }
   },
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
   hsts: IS_PROD ? { maxAge: 31536000, includeSubDomains: true } : false,
   crossOriginEmbedderPolicy: false
 }));

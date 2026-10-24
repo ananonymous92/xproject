@@ -140,7 +140,7 @@
     return j.url;
   }
 
-  function fieldEl(obj, [key, label, type = 'text', opts]) {
+  function fieldEl(obj, [key, label, type = 'text', opts], parentArr) {
     const wrap = document.createElement('div'); wrap.className = 'field';
     const lbl = document.createElement('label'); lbl.textContent = label; wrap.append(lbl);
     let input;
@@ -155,9 +155,34 @@
       const firstVal = typeof opts[0] === 'object' ? opts[0].value : opts[0];
       input.value = obj[key] || firstVal;
       obj[key] = input.value;
-      input.onchange = input.oninput = () => { obj[key] = input.value; };
+      input.onchange = input.oninput = () => {
+        obj[key] = input.value;
+        if (key === 'category') {
+          const opt = opts.find((o) => (typeof o === 'object' ? o.value : o) === input.value);
+          if (opt && typeof opt === 'object' && opt.label) {
+            obj.categoryLabel = opt.label.replace(/^[\p{Emoji}\s]+/u, '').trim();
+          }
+        }
+      };
     }
-    else if (type === 'bool') { input = document.createElement('input'); input.type = 'checkbox'; input.style.width = 'auto'; input.checked = !!obj[key]; input.onchange = () => (obj[key] = input.checked); wrap.append(input); return wrap; }
+    else if (type === 'bool') {
+      input = document.createElement('input');
+      input.type = 'checkbox';
+      input.style.width = 'auto';
+      input.checked = !!obj[key];
+      input.onchange = () => {
+        obj[key] = input.checked;
+        if (key === 'featured' && input.checked && Array.isArray(parentArr)) {
+          // Ketika satu video dijadikan Spotlight Utama, uncheck video lain secara otomatis
+          parentArr.forEach((other) => {
+            if (other !== obj) other.featured = false;
+          });
+          render();
+        }
+      };
+      wrap.append(input);
+      return wrap;
+    }
     else { input = document.createElement('input'); input.type = type === 'date' ? 'date' : 'text'; }
     if (type !== 'select') input.value = obj[key] ?? '';
     let prev;
@@ -216,7 +241,7 @@
         mk('↑', () => { if (i > 0) { [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]]; render(); } });
         mk('↓', () => { if (i < arr.length - 1) { [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]]; render(); } });
         mk('Hapus', () => { if (confirm('Hapus item ini?')) { arr.splice(i, 1); render(); } });
-        s.list.fields.forEach((f) => box.append(fieldEl(it, f)));
+        s.list.fields.forEach((f) => box.append(fieldEl(it, f, arr)));
         ed.append(box);
       });
       const add = document.createElement('button'); add.className = 'ghost'; add.textContent = `+ Tambah ${s.list.label}`;
@@ -248,6 +273,26 @@
   $('saveBtn').onclick = async () => {
     if (current === 'footer') { data.contact.facebook = data.footer.facebook; data.contact.instagram = data.footer.instagram; }
     else if (current === 'contact') { data.footer.facebook = data.contact.facebook; data.footer.instagram = data.contact.instagram; }
+
+    // Sinkronisasi data video (categoryLabel & pastikan hanya 1 featured)
+    if (data.videos && Array.isArray(data.videos.items)) {
+      const catLabels = {
+        process: 'Craftsmanship',
+        tests: 'Uji Ketahanan',
+        results: 'Hasil Akhir',
+        shorts: 'Shorts & Reels'
+      };
+      const featuredList = data.videos.items.filter((v) => v.featured);
+      const chosen = featuredList.length > 0 ? featuredList[featuredList.length - 1] : null;
+
+      data.videos.items.forEach((it) => {
+        it.featured = (it === chosen);
+        if (!it.categoryLabel || it.categoryLabel === 'Video') {
+          it.categoryLabel = catLabels[it.category] || 'Video';
+        }
+      });
+    }
+
     try { data = await Store.save(data); render(); toast('Perubahan tersimpan ✓'); }
     catch (e) { if (e.status === 401) { showLogin(); alert('Sesi berakhir, silakan login ulang.'); } else alert('Gagal menyimpan: ' + e.message); }
   };
