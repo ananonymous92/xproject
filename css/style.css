@@ -731,25 +731,30 @@ body.nav-open{overflow:hidden}
   .hero-badges{
     display:grid;
     grid-template-columns:repeat(2, minmax(0, 1fr));
-    gap:8px 10px;
+    gap:10px 14px;
     width:100%;
-    margin-top:6px;
+    margin-top:8px;
+    padding:16px 18px;
+    border:1px solid var(--line);
+    border-radius:18px;
+    background:var(--badge-bg);
+    backdrop-filter:blur(12px);
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
   }
   .hero-badges span{
     display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    font-size:.76rem;
+    align-items:flex-start;
+    text-align:left;
+    font-size:.78rem;
     font-weight:600;
-    line-height:1.25;
-    padding:9px 8px;
-    border:1px solid var(--line);
-    border-radius:12px;
-    background:var(--badge-bg);
+    line-height:1.35;
+    padding:0;
+    border:none;
+    border-radius:0;
+    background:transparent;
     color:var(--badge-color);
-    box-shadow:0 2px 8px rgba(0,0,0,.04);
-    min-height:42px;
+    box-shadow:none;
+    min-height:auto;
     max-width:100%;
     white-space:normal;
     word-break:break-word;
@@ -757,8 +762,9 @@ body.nav-open{overflow:hidden}
   .hero-badges span::before{
     content:"✦";
     color:var(--gold);
-    margin-right:5px;
-    font-size:.82rem;
+    margin-right:7px;
+    font-size:.84rem;
+    line-height:1.35;
     flex-shrink:0;
   }
   .hero-badges span:last-child:nth-child(odd){
@@ -1099,12 +1105,11 @@ body.nav-open{overflow:hidden}
 
 @media (max-width:340px){
   .hero-badges{
-    gap:6px;
+    padding:12px 14px;
+    gap:8px 10px;
   }
   .hero-badges span{
-    font-size:.71rem;
-    padding:7px 4px;
-    min-height:38px;
+    font-size:.72rem;
   }
   .gallery{
     grid-template-columns:1fr;
