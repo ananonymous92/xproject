@@ -729,19 +729,40 @@ body.nav-open{overflow:hidden}
     font-size:.95rem;
   }
   .hero-badges{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:8px 10px;
     width:100%;
+    margin-top:6px;
   }
   .hero-badges span{
-    display:inline-flex;
+    display:flex;
     align-items:center;
-    font-size:.78rem;
-    padding:7px 13px;
-    border-radius:999px;
+    justify-content:center;
+    text-align:center;
+    font-size:.76rem;
+    font-weight:600;
+    line-height:1.25;
+    padding:9px 8px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--badge-bg);
+    color:var(--badge-color);
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+    min-height:42px;
     max-width:100%;
-    white-space:nowrap;
+    white-space:normal;
+    word-break:break-word;
+  }
+  .hero-badges span::before{
+    content:"✦";
+    color:var(--gold);
+    margin-right:5px;
+    font-size:.82rem;
+    flex-shrink:0;
+  }
+  .hero-badges span:last-child:nth-child(odd){
+    grid-column:span 2;
   }
   .scroll-hint{
     display:none;
@@ -1076,9 +1097,14 @@ body.nav-open{overflow:hidden}
   }
 }
 
-@media (max-width:360px){
+@media (max-width:340px){
   .hero-badges{
-    grid-template-columns:1fr;
+    gap:6px;
+  }
+  .hero-badges span{
+    font-size:.71rem;
+    padding:7px 4px;
+    min-height:38px;
   }
   .gallery{
     grid-template-columns:1fr;
