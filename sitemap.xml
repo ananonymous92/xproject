@@ -13,6 +13,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.xprojectppf.id/ppf</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.xprojectppf.id/video</loc>
     <lastmod>2026-10-23</lastmod>
     <changefreq>weekly</changefreq>

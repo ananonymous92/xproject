@@ -257,6 +257,8 @@ app.get('/video.html', (req, res) => res.redirect(301, '/video'));
 app.get('/video', (req, res) => res.sendFile(path.join(ROOT, 'video.html')));
 app.get('/tentang.html', (req, res) => res.redirect(301, '/tentang'));
 app.get('/tentang', (req, res) => res.sendFile(path.join(ROOT, 'tentang.html')));
+app.get('/ppf.html', (req, res) => res.redirect(301, '/ppf'));
+app.get('/ppf', (req, res) => res.sendFile(path.join(ROOT, 'ppf.html')));
 app.get('/admin.html', (req, res) => { res.setHeader('X-Robots-Tag', 'noindex, nofollow'); res.sendFile(path.join(ROOT, 'admin.html')); });
 
 app.use((req, res) => res.status(404).send('Not found'));
