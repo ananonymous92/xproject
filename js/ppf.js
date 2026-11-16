@@ -92,24 +92,46 @@
   }
 
   /* ---------------- Interactive 3-Layer Film Anatomy ---------------- */
-  const DEFECT_DATA = {
-    '0': {
-      img: 'assets/cheap-ppf-yellowing.jpg',
-      badge: '⚠️ Dampak PPF Murah · Lapisan 01 Substrat',
-      title: 'Contoh PPF murah · Film menguning saat dikelupas',
-      desc: 'Substrat non-PCL cepat teroksidasi sinar UV, berubah kuning kusam dan merusak estetika warna asli mobil.'
+  const LAYER_VISUAL_DATA = {
+    xp: {
+      '0': {
+        img: 'assets/xp-ppf-substrat.jpg',
+        badge: '✓ Standar X-Project · Lapisan 01 Substrat',
+        title: 'X-Project PPF · TPU Alifatik PCL Bening Kristal',
+        desc: 'Tetap jernih 100% tanpa menguning meski terpapar UV tropis bertahun-tahun, menjaga warna asli cat pabrik tetap murni.'
+      },
+      '1': {
+        img: 'assets/xp-ppf-adhesive.jpg',
+        badge: '✓ Standar X-Project · Lapisan 02 Perekat',
+        title: 'X-Project PPF · Perekat Ashland® Dilepas Tanpa Residu',
+        desc: 'Daya rekat awal terukur dan saat dilepas tidak meninggalkan sisa lem sedikit pun—cat orisinal pabrik tetap utuh 100%.'
+      },
+      '2': {
+        img: 'assets/xp-ppf-topcoat.jpg',
+        badge: '✓ Standar X-Project · Lapisan 03 Top Coat',
+        title: 'X-Project PPF · Nano Self-Healing & Super Hidrofobik',
+        desc: 'Permukaan sehalus cermin dengan efek daun talas (hydrophobic) serta kemampuan memulihkan baret halus saat terkena panas.'
+      }
     },
-    '1': {
-      img: 'assets/cheap-ppf-adhesive.jpg',
-      badge: '⚠️ Dampak PPF Murah · Lapisan 02 Perekat',
-      title: 'Contoh PPF murah · Sisa lem dan cat terkelupas',
-      desc: 'Perekat murah meninggalkan kerak lem lengket dan menarik lapisan pernis/cat pabrik saat film dikelupas.'
-    },
-    '2': {
-      img: 'assets/cheap-ppf-cracked.jpg',
-      badge: '⚠️ Dampak PPF Murah · Lapisan 03 Top Coat',
-      title: 'Contoh PPF murah · Permukaan retak dan kusam',
-      desc: 'Lapisan atas PPF murah mengering, pecah seribu (retak rambut), kusam, dan tidak mampu pulih dari baret.'
+    cheap: {
+      '0': {
+        img: 'assets/cheap-ppf-yellowing.jpg',
+        badge: '⚠️ Dampak PPF Murah · Lapisan 01 Substrat',
+        title: 'Contoh PPF murah · Film menguning saat dikelupas',
+        desc: 'Substrat non-PCL cepat teroksidasi sinar UV, berubah kuning kusam dan merusak estetika warna asli mobil.'
+      },
+      '1': {
+        img: 'assets/cheap-ppf-adhesive.jpg',
+        badge: '⚠️ Dampak PPF Murah · Lapisan 02 Perekat',
+        title: 'Contoh PPF murah · Sisa lem dan cat terkelupas',
+        desc: 'Perekat murah meninggalkan kerak lem lengket dan menarik lapisan pernis/cat pabrik saat film dikelupas.'
+      },
+      '2': {
+        img: 'assets/cheap-ppf-cracked.jpg',
+        badge: '⚠️ Dampak PPF Murah · Lapisan 03 Top Coat',
+        title: 'Contoh PPF murah · Permukaan retak dan kusam',
+        desc: 'Lapisan atas PPF murah mengering, pecah seribu (retak rambut), kusam, dan tidak mampu pulih dari baret.'
+      }
     }
   };
 
@@ -139,6 +161,23 @@
     const defectDesc = $('pfDefectDesc');
     const defectStage = $('pfDefectStage');
 
+    const syncVisualStage = () => {
+      const mode = layersWrap.getAttribute('data-mode') || 'xp';
+      const key = layersWrap.getAttribute('data-layer') || '0';
+      const d = (LAYER_VISUAL_DATA[mode] || LAYER_VISUAL_DATA.xp)[key];
+      if (!d) return;
+      if (defectImg) {
+        defectImg.src = d.img;
+        defectImg.alt = d.title;
+      }
+      if (defectBadge) {
+        defectBadge.textContent = d.badge;
+        defectBadge.classList.toggle('is-xp', mode === 'xp');
+      }
+      if (defectTitle) defectTitle.textContent = d.title;
+      if (defectDesc) defectDesc.textContent = d.desc;
+    };
+
     const setMode = (mode) => {
       layersWrap.setAttribute('data-mode', mode);
       modeBtns.forEach((b) => {
@@ -146,6 +185,7 @@
         b.classList.toggle('active', active);
         b.setAttribute('aria-selected', String(active));
       });
+      syncVisualStage();
     };
 
     const setLayer = (idx) => {
@@ -153,16 +193,7 @@
       layersWrap.setAttribute('data-layer', key);
       slices.forEach((s) => s.classList.toggle('active', s.dataset.layer === key));
       cards.forEach((c) => c.classList.toggle('active', c.dataset.layer === key));
-      const d = DEFECT_DATA[key];
-      if (d) {
-        if (defectImg) {
-          defectImg.src = d.img;
-          defectImg.alt = d.title;
-        }
-        if (defectBadge) defectBadge.textContent = d.badge;
-        if (defectTitle) defectTitle.textContent = d.title;
-        if (defectDesc) defectDesc.textContent = d.desc;
-      }
+      syncVisualStage();
     };
 
     modeBtns.forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
@@ -181,16 +212,18 @@
       thumb.addEventListener('click', (e) => {
         e.stopPropagation();
         const key = String(thumb.getAttribute('data-zoom-layer') || '0');
+        const mode = thumb.getAttribute('data-zoom-mode') || (layersWrap.getAttribute('data-mode') || 'xp');
         setLayer(key);
-        setMode('cheap');
-        const d = DEFECT_DATA[key];
+        setMode(mode);
+        const d = (LAYER_VISUAL_DATA[mode] || LAYER_VISUAL_DATA.xp)[key];
         if (d) openPfLightbox(d.img, `${d.title} — ${d.desc}`);
       });
     });
 
     defectStage?.addEventListener('click', () => {
+      const mode = layersWrap.getAttribute('data-mode') || 'xp';
       const key = layersWrap.getAttribute('data-layer') || '0';
-      const d = DEFECT_DATA[key];
+      const d = (LAYER_VISUAL_DATA[mode] || LAYER_VISUAL_DATA.xp)[key];
       if (d) openPfLightbox(d.img, `${d.title} — ${d.desc}`);
     });
     defectStage?.addEventListener('keydown', (e) => {

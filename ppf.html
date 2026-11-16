@@ -59,7 +59,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=21">
-  <link rel="stylesheet" href="css/ppf.css?v=2">
+  <link rel="stylesheet" href="css/ppf.css?v=3">
   <script src="js/theme.js?v=5"></script>
 </head>
 <body class="pf-page">
@@ -254,16 +254,16 @@
               </div>
             </div>
 
-            <!-- Live Defect Photo Stage -->
-            <div class="pf-defect-stage" id="pfDefectStage" role="button" tabindex="0" aria-label="Perbesar foto contoh kerusakan PPF murah">
+            <!-- Live Layer Photo Stage (Flips between X-Project PPF vs Cheap PPF) -->
+            <div class="pf-defect-stage" id="pfDefectStage" role="button" tabindex="0" aria-label="Perbesar foto perbandingan lapisan PPF">
               <div class="pf-defect-img-wrap">
-                <img id="pfDefectImg" src="assets/cheap-ppf-yellowing.jpg" alt="Contoh PPF murah menguning saat dikelupas" loading="lazy">
-                <span class="pf-defect-badge" id="pfDefectBadge">⚠️ Dampak PPF Murah · Lapisan 01 Substrat</span>
+                <img id="pfDefectImg" src="assets/xp-ppf-substrat.jpg" alt="X-Project PPF Substrat TPU Alifatik PCL bening kristal" loading="lazy">
+                <span class="pf-defect-badge is-xp" id="pfDefectBadge">✓ Standar X-Project · Lapisan 01 Substrat</span>
                 <span class="pf-defect-zoom">🔍 Perbesar Foto</span>
               </div>
               <div class="pf-defect-caption">
-                <strong id="pfDefectTitle">Contoh PPF murah · Film menguning saat dikelupas</strong>
-                <p id="pfDefectDesc">Substrat non-PCL cepat teroksidasi sinar UV, berubah kuning kusam dan merusak estetika warna asli mobil.</p>
+                <strong id="pfDefectTitle">X-Project PPF · TPU Alifatik PCL Bening Kristal</strong>
+                <p id="pfDefectDesc">Tetap jernih 100% tanpa menguning meski terpapar UV tropis bertahun-tahun, menjaga warna asli cat pabrik tetap murni.</p>
               </div>
             </div>
           </div>
@@ -273,43 +273,84 @@
               <span class="pf-layer-no">01</span>
               <div class="pf-layer-body">
                 <span class="pf-layer-kicker">Substrat</span>
-                <h3>TPU alifatik PCL, tetap bening bertahun-tahun</h3>
-                <p>Material polikaprolakton tahan kuning dan tahan hidrolisis.</p>
-                <div class="pf-defect-thumb" data-zoom-layer="0">
+                <h3 class="xp-only">TPU alifatik PCL, tetap bening bertahun-tahun</h3>
+                <h3 class="cheap-only">Substrat murah cepat menguning &amp; kusam</h3>
+                <p class="xp-only">Material polikaprolakton tahan kuning dan tahan hidrolisis.</p>
+                <p class="cheap-only">Material non-PCL teroksidasi sinar UV, berubah kuning kecokelatan dan merusak tampilan warna mobil.</p>
+
+                <!-- Thumbnail saat mode X-Project PPF -->
+                <div class="pf-defect-thumb xp-only-flex" data-zoom-layer="0" data-zoom-mode="xp">
+                  <img src="assets/xp-ppf-substrat.jpg" alt="X-Project PPF bening kristal di atas cat putih" loading="lazy">
+                  <div class="pf-defect-thumb-info">
+                    <span class="pf-xp-tag">✓ X-Project PPF · Bening Kristal &amp; Anti-Kuning</span>
+                    <small>Kejernihan optik tinggi di atas cat putih maupun gelap · <b>Perbesar 🔍</b></small>
+                  </div>
+                </div>
+
+                <!-- Thumbnail saat mode Simulasi PPF Murah -->
+                <div class="pf-defect-thumb cheap-only-flex" data-zoom-layer="0" data-zoom-mode="cheap">
                   <img src="assets/cheap-ppf-yellowing.jpg" alt="PPF murah menguning saat dikelupas" loading="lazy">
                   <div class="pf-defect-thumb-info">
-                    <span class="pf-cheap-tag">Contoh PPF murah · Film menguning</span>
-                    <small>Film berubah kuning kusam saat dikelupas · <b>Lihat foto 🔍</b></small>
+                    <span class="pf-cheap-tag">⚠️ Contoh PPF murah · Film menguning</span>
+                    <small>Film berubah kuning kusam saat dikelupas · <b>Perbesar 🔍</b></small>
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="pf-layer-card" data-layer="1" tabindex="0" role="button" aria-label="Lapisan 02 Perekat">
               <span class="pf-layer-no">02</span>
               <div class="pf-layer-body">
                 <span class="pf-layer-kicker">Perekat</span>
-                <h3>Perekat Ashland®, dilepas tanpa residu</h3>
-                <p>Daya rekat awal terukur, cat pabrik tetap utuh saat film dilepas.</p>
-                <div class="pf-defect-thumb" data-zoom-layer="1">
+                <h3 class="xp-only">Perekat Ashland®, dilepas tanpa residu</h3>
+                <h3 class="cheap-only">Perekat murah meninggalkan lem &amp; mengangkat cat</h3>
+                <p class="xp-only">Daya rekat awal terukur, cat pabrik tetap utuh saat film dilepas.</p>
+                <p class="cheap-only">Lem kualitas rendah mengeras dan menyatu dengan pernis, sehingga menarik cat asli saat film dikelupas.</p>
+
+                <!-- Thumbnail saat mode X-Project PPF -->
+                <div class="pf-defect-thumb xp-only-flex" data-zoom-layer="1" data-zoom-mode="xp">
+                  <img src="assets/xp-ppf-adhesive.jpg" alt="Perekat Ashland X-Project dilepas bersih tanpa residu" loading="lazy">
+                  <div class="pf-defect-thumb-info">
+                    <span class="pf-xp-tag">✓ X-Project PPF · Dilepas Bersih Tanpa Sisa Lem</span>
+                    <small>Cat orisinal pabrik tetap mulus 100% saat film dilepas · <b>Perbesar 🔍</b></small>
+                  </div>
+                </div>
+
+                <!-- Thumbnail saat mode Simulasi PPF Murah -->
+                <div class="pf-defect-thumb cheap-only-flex" data-zoom-layer="1" data-zoom-mode="cheap">
                   <img src="assets/cheap-ppf-adhesive.jpg" alt="Perekat lem PPF murah terkelupas dan merusak cat" loading="lazy">
                   <div class="pf-defect-thumb-info">
-                    <span class="pf-cheap-tag">Contoh PPF murah · Sisa lem dan cat terkelupas</span>
-                    <small>Perekat lem tertinggal &amp; menarik pernis cat · <b>Lihat foto 🔍</b></small>
+                    <span class="pf-cheap-tag">⚠️ Contoh PPF murah · Sisa lem dan cat terkelupas</span>
+                    <small>Perekat lem tertinggal &amp; menarik pernis cat · <b>Perbesar 🔍</b></small>
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="pf-layer-card" data-layer="2" tabindex="0" role="button" aria-label="Lapisan 03 Top coat">
               <span class="pf-layer-no">03</span>
               <div class="pf-layer-body">
                 <span class="pf-layer-kicker">Top coat</span>
-                <h3>Coating nano self-healing dan super hidrofobik</h3>
-                <p>Baret halus pulih dengan panas, air dan kotoran mudah luruh.</p>
-                <div class="pf-defect-thumb" data-zoom-layer="2">
+                <h3 class="xp-only">Coating nano self-healing dan super hidrofobik</h3>
+                <h3 class="cheap-only">Permukaan PPF murah retak-retak &amp; kusam</h3>
+                <p class="xp-only">Baret halus pulih dengan panas, air dan kotoran mudah luruh.</p>
+                <p class="cheap-only">Top coat murah cepat getas akibat panas matahari, memicu retak seribu (crazing) dan noda permanen.</p>
+
+                <!-- Thumbnail saat mode X-Project PPF -->
+                <div class="pf-defect-thumb xp-only-flex" data-zoom-layer="2" data-zoom-mode="xp">
+                  <img src="assets/xp-ppf-topcoat.jpg" alt="Top coat nano self-healing dan hidrofobik X-Project PPF" loading="lazy">
+                  <div class="pf-defect-thumb-info">
+                    <span class="pf-xp-tag">✓ X-Project PPF · Self-Healing &amp; Efek Daun Talas</span>
+                    <small>Kilap cermin, air langsung luruh, bebas retak rambut · <b>Perbesar 🔍</b></small>
+                  </div>
+                </div>
+
+                <!-- Thumbnail saat mode Simulasi PPF Murah -->
+                <div class="pf-defect-thumb cheap-only-flex" data-zoom-layer="2" data-zoom-mode="cheap">
                   <img src="assets/cheap-ppf-cracked.jpg" alt="Permukaan PPF murah retak-retak dan kusam" loading="lazy">
                   <div class="pf-defect-thumb-info">
-                    <span class="pf-cheap-tag">Contoh PPF murah · Permukaan retak dan kusam</span>
-                    <small>Permukaan PPF murah retak-retak (crazing) &amp; kusam · <b>Lihat foto 🔍</b></small>
+                    <span class="pf-cheap-tag">⚠️ Contoh PPF murah · Permukaan retak dan kusam</span>
+                    <small>Permukaan PPF murah retak-retak (crazing) &amp; kusam · <b>Perbesar 🔍</b></small>
                   </div>
                 </div>
               </div>
@@ -835,6 +876,6 @@
   </div>
 
   <script src="js/data.js?v=6"></script>
-  <script src="js/ppf.js?v=2"></script>
+  <script src="js/ppf.js?v=3"></script>
 </body>
 </html>
