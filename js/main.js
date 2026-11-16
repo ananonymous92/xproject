@@ -56,8 +56,14 @@
   $('heroEyebrow').textContent = C.hero.eyebrow;
   $('heroHeadline').textContent = C.hero.headline;
   $('heroSub').textContent = C.hero.subheadline;
-  $('heroCta1').textContent = C.hero.cta1;
-  $('heroCta2').textContent = C.hero.cta2;
+  const rawCta1 = (C.hero.cta1 || '').trim();
+  const rawCta2 = (C.hero.cta2 || '').trim();
+  $('heroCta1').textContent = (!rawCta1 || /^konsultasi(\s+sekarang|\s+via\s+whatsapp)?$/i.test(rawCta1))
+    ? 'Cek Paket & Promo Spesial Disini'
+    : rawCta1;
+  $('heroCta2').textContent = (!rawCta2 || /^lihat\s+paket(\s+ppf)?$/i.test(rawCta2))
+    ? 'Lihat Layanan Kami'
+    : rawCta2;
   $('heroBadges').innerHTML = (C.hero.badges || '')
     .split(/[•·.|\n]+/)
     .map((b) => b.trim())
@@ -69,7 +75,68 @@
   $('aboutImg').src = safeUrl(C.about.image, '');
   $('aboutTitle').textContent = C.about.title;
   $('aboutText').textContent = C.about.text;
-  $('benefits').innerHTML = C.about.benefits.map((b) => `<div class="benefit"><div class="ic">${icon(b.icon)}</div><h3>${esc(b.title)}</h3><p>${esc(b.text)}</p></div>`).join('');
+  $('benefits').innerHTML = C.about.benefits.map((b, i) => `
+    <div class="benefit reveal" data-benefit-title="${esc(b.title)}" tabindex="0" role="button" aria-label="Tanya seputar ${esc(b.title)}">
+      <div class="benefit-top">
+        <div class="ic">${icon(b.icon)}</div>
+        <span class="benefit-num">0${i + 1}</span>
+      </div>
+      <h3>${esc(b.title)}</h3>
+      <p>${esc(b.text)}</p>
+      <span class="benefit-more">Tanya Promo &amp; Fasilitas Ini <span>&rarr;</span></span>
+    </div>
+  `).join('');
+
+  // Interactive About Showcase (3D tilt + Lightbox zoom + Benefit click/glow)
+  const aboutFrame = document.querySelector('.about-frame');
+  if (aboutFrame && window.matchMedia?.('(hover: hover) and (pointer: fine)').matches) {
+    aboutFrame.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
+      const r = aboutFrame.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      const nx = (e.clientX - r.left) / r.width;
+      const ny = (e.clientY - r.top) / r.height;
+      aboutFrame.style.setProperty('--rx', `${((0.5 - ny) * 7).toFixed(2)}deg`);
+      aboutFrame.style.setProperty('--ry', `${((nx - 0.5) * 7).toFixed(2)}deg`);
+    });
+    aboutFrame.addEventListener('pointerleave', () => {
+      aboutFrame.style.setProperty('--rx', '0deg');
+      aboutFrame.style.setProperty('--ry', '0deg');
+    });
+  }
+  const openAboutLightbox = () => {
+    const img = $('aboutImg');
+    const lbEl = $('lightbox');
+    if (!img || !lbEl || !img.src) return;
+    $('lbImg').src = img.src;
+    $('lbCap').textContent = C.about.title || 'Spesifikasi Material Paint Protection Film X-Project';
+    lbEl.classList.add('open');
+  };
+  $('aboutMediaBox')?.addEventListener('click', openAboutLightbox);
+  $('aboutMediaBox')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openAboutLightbox(); }
+  });
+  $('aboutZoomBtn')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openAboutLightbox();
+  });
+  $('benefits')?.querySelectorAll('.benefit').forEach((card) => {
+    card.addEventListener('pointermove', (e) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${(e.clientX - r.left).toFixed(1)}px`);
+      card.style.setProperty('--my', `${(e.clientY - r.top).toFixed(1)}px`);
+    });
+    card.addEventListener('click', () => {
+      const title = card.getAttribute('data-benefit-title') || 'PPF';
+      window.open(waUrl(`Halo ${C.brand.name}, saya ingin cek paket & promo spesial serta info fasilitas "${title}".`), '_blank');
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
 
   // Services
   $('services').innerHTML = C.services.map((s, i) => `<article class="service reveal"><span class="num">0${i + 1}</span><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></article>`).join('');

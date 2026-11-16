@@ -92,11 +92,52 @@
   }
 
   /* ---------------- Interactive 3-Layer Film Anatomy ---------------- */
+  const DEFECT_DATA = {
+    '0': {
+      img: 'assets/cheap-ppf-yellowing.jpg',
+      badge: '⚠️ Dampak PPF Murah · Lapisan 01 Substrat',
+      title: 'Contoh PPF murah · Film menguning saat dikelupas',
+      desc: 'Substrat non-PCL cepat teroksidasi sinar UV, berubah kuning kusam dan merusak estetika warna asli mobil.'
+    },
+    '1': {
+      img: 'assets/cheap-ppf-adhesive.jpg',
+      badge: '⚠️ Dampak PPF Murah · Lapisan 02 Perekat',
+      title: 'Contoh PPF murah · Sisa lem dan cat terkelupas',
+      desc: 'Perekat murah meninggalkan kerak lem lengket dan menarik lapisan pernis/cat pabrik saat film dikelupas.'
+    },
+    '2': {
+      img: 'assets/cheap-ppf-cracked.jpg',
+      badge: '⚠️ Dampak PPF Murah · Lapisan 03 Top Coat',
+      title: 'Contoh PPF murah · Permukaan retak dan kusam',
+      desc: 'Lapisan atas PPF murah mengering, pecah seribu (retak rambut), kusam, dan tidak mampu pulih dari baret.'
+    }
+  };
+
+  const pfLb = $('pfLightbox');
+  const pfLbImg = $('pfLbImg');
+  const pfLbCap = $('pfLbCap');
+  const openPfLightbox = (src, cap) => {
+    if (!pfLb || !pfLbImg) return;
+    pfLbImg.src = src;
+    if (pfLbCap) pfLbCap.textContent = cap || '';
+    pfLb.classList.add('open');
+  };
+  pfLb?.addEventListener('click', () => pfLb.classList.remove('open'));
+  $('pfLbClose')?.addEventListener('click', (e) => { e.stopPropagation(); pfLb.classList.remove('open'); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') pfLb?.classList.remove('open');
+  });
+
   const layersWrap = $('pfLayers');
   if (layersWrap) {
     const modeBtns = layersWrap.querySelectorAll('.pf-mode-btn');
     const slices = layersWrap.querySelectorAll('.pf-slice');
     const cards = layersWrap.querySelectorAll('.pf-layer-card');
+    const defectImg = $('pfDefectImg');
+    const defectBadge = $('pfDefectBadge');
+    const defectTitle = $('pfDefectTitle');
+    const defectDesc = $('pfDefectDesc');
+    const defectStage = $('pfDefectStage');
 
     const setMode = (mode) => {
       layersWrap.setAttribute('data-mode', mode);
@@ -108,14 +149,56 @@
     };
 
     const setLayer = (idx) => {
-      layersWrap.setAttribute('data-layer', idx);
-      slices.forEach((s) => s.classList.toggle('active', s.dataset.layer === idx));
-      cards.forEach((c) => c.classList.toggle('active', c.dataset.layer === idx));
+      const key = String(idx);
+      layersWrap.setAttribute('data-layer', key);
+      slices.forEach((s) => s.classList.toggle('active', s.dataset.layer === key));
+      cards.forEach((c) => c.classList.toggle('active', c.dataset.layer === key));
+      const d = DEFECT_DATA[key];
+      if (d) {
+        if (defectImg) {
+          defectImg.src = d.img;
+          defectImg.alt = d.title;
+        }
+        if (defectBadge) defectBadge.textContent = d.badge;
+        if (defectTitle) defectTitle.textContent = d.title;
+        if (defectDesc) defectDesc.textContent = d.desc;
+      }
     };
 
     modeBtns.forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
     slices.forEach((s) => s.addEventListener('click', () => setLayer(s.dataset.layer)));
-    cards.forEach((c) => c.addEventListener('click', () => setLayer(c.dataset.layer)));
+    cards.forEach((c) => {
+      c.addEventListener('click', () => setLayer(c.dataset.layer));
+      c.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setLayer(c.dataset.layer);
+        }
+      });
+    });
+
+    layersWrap.querySelectorAll('.pf-defect-thumb').forEach((thumb) => {
+      thumb.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const key = String(thumb.getAttribute('data-zoom-layer') || '0');
+        setLayer(key);
+        setMode('cheap');
+        const d = DEFECT_DATA[key];
+        if (d) openPfLightbox(d.img, `${d.title} — ${d.desc}`);
+      });
+    });
+
+    defectStage?.addEventListener('click', () => {
+      const key = layersWrap.getAttribute('data-layer') || '0';
+      const d = DEFECT_DATA[key];
+      if (d) openPfLightbox(d.img, `${d.title} — ${d.desc}`);
+    });
+    defectStage?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        defectStage.click();
+      }
+    });
   }
 
   /* ---------------- Interactive Micron Thickness Visualizer ---------------- */

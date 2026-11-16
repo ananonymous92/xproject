@@ -58,8 +58,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20">
-  <link rel="stylesheet" href="css/ppf.css?v=1">
+  <link rel="stylesheet" href="css/style.css?v=21">
+  <link rel="stylesheet" href="css/ppf.css?v=2">
   <script src="js/theme.js?v=5"></script>
 </head>
 <body class="pf-page">
@@ -87,7 +87,7 @@
         <a href="/#location">Location</a>
         <a href="/#news">News</a>
         <a href="/#contact">Contact</a>
-        <a class="btn btn-gold nav-cta-mobile wa-link" href="#">Konsultasi via WhatsApp</a>
+        <a class="btn btn-gold nav-cta-mobile wa-link" href="#">Cek Paket &amp; Promo Spesial Disini</a>
       </nav>
       <div class="nav-right">
         <button class="theme-toggle" id="themeToggle" aria-label="Ganti Tema (Siang / Malam)" title="Mode Siang / Malam">
@@ -102,7 +102,7 @@
           </svg>
           <span class="theme-label" id="themeText"></span>
         </button>
-        <a class="btn btn-gold nav-cta wa-link" id="navCta" href="#"><span class="cta-long">Konsultasi via</span>WhatsApp</a>
+        <a class="btn btn-gold nav-cta wa-link" id="navCta" href="#"><span class="cta-long">Cek Paket &amp; </span>Promo Disini</a>
         <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -253,36 +253,67 @@
                 <small class="cheap-only">Risiko rusak saat dilepas</small>
               </div>
             </div>
+
+            <!-- Live Defect Photo Stage -->
+            <div class="pf-defect-stage" id="pfDefectStage" role="button" tabindex="0" aria-label="Perbesar foto contoh kerusakan PPF murah">
+              <div class="pf-defect-img-wrap">
+                <img id="pfDefectImg" src="assets/cheap-ppf-yellowing.jpg" alt="Contoh PPF murah menguning saat dikelupas" loading="lazy">
+                <span class="pf-defect-badge" id="pfDefectBadge">⚠️ Dampak PPF Murah · Lapisan 01 Substrat</span>
+                <span class="pf-defect-zoom">🔍 Perbesar Foto</span>
+              </div>
+              <div class="pf-defect-caption">
+                <strong id="pfDefectTitle">Contoh PPF murah · Film menguning saat dikelupas</strong>
+                <p id="pfDefectDesc">Substrat non-PCL cepat teroksidasi sinar UV, berubah kuning kusam dan merusak estetika warna asli mobil.</p>
+              </div>
+            </div>
           </div>
 
           <div class="pf-layers-cards">
-            <button type="button" class="pf-layer-card active" data-layer="0">
+            <div class="pf-layer-card active" data-layer="0" tabindex="0" role="button" aria-label="Lapisan 01 Substrat">
               <span class="pf-layer-no">01</span>
               <div class="pf-layer-body">
                 <span class="pf-layer-kicker">Substrat</span>
                 <h3>TPU alifatik PCL, tetap bening bertahun-tahun</h3>
                 <p>Material polikaprolakton tahan kuning dan tahan hidrolisis.</p>
-                <span class="pf-cheap-tag">Contoh PPF murah · Film menguning</span>
+                <div class="pf-defect-thumb" data-zoom-layer="0">
+                  <img src="assets/cheap-ppf-yellowing.jpg" alt="PPF murah menguning saat dikelupas" loading="lazy">
+                  <div class="pf-defect-thumb-info">
+                    <span class="pf-cheap-tag">Contoh PPF murah · Film menguning</span>
+                    <small>Film berubah kuning kusam saat dikelupas · <b>Lihat foto 🔍</b></small>
+                  </div>
+                </div>
               </div>
-            </button>
-            <button type="button" class="pf-layer-card" data-layer="1">
+            </div>
+            <div class="pf-layer-card" data-layer="1" tabindex="0" role="button" aria-label="Lapisan 02 Perekat">
               <span class="pf-layer-no">02</span>
               <div class="pf-layer-body">
                 <span class="pf-layer-kicker">Perekat</span>
                 <h3>Perekat Ashland®, dilepas tanpa residu</h3>
                 <p>Daya rekat awal terukur, cat pabrik tetap utuh saat film dilepas.</p>
-                <span class="pf-cheap-tag">Contoh PPF murah · Sisa lem dan cat terkelupas</span>
+                <div class="pf-defect-thumb" data-zoom-layer="1">
+                  <img src="assets/cheap-ppf-adhesive.jpg" alt="Perekat lem PPF murah terkelupas dan merusak cat" loading="lazy">
+                  <div class="pf-defect-thumb-info">
+                    <span class="pf-cheap-tag">Contoh PPF murah · Sisa lem dan cat terkelupas</span>
+                    <small>Perekat lem tertinggal &amp; menarik pernis cat · <b>Lihat foto 🔍</b></small>
+                  </div>
+                </div>
               </div>
-            </button>
-            <button type="button" class="pf-layer-card" data-layer="2">
+            </div>
+            <div class="pf-layer-card" data-layer="2" tabindex="0" role="button" aria-label="Lapisan 03 Top coat">
               <span class="pf-layer-no">03</span>
               <div class="pf-layer-body">
                 <span class="pf-layer-kicker">Top coat</span>
                 <h3>Coating nano self-healing dan super hidrofobik</h3>
                 <p>Baret halus pulih dengan panas, air dan kotoran mudah luruh.</p>
-                <span class="pf-cheap-tag">Contoh PPF murah · Permukaan retak dan kusam</span>
+                <div class="pf-defect-thumb" data-zoom-layer="2">
+                  <img src="assets/cheap-ppf-cracked.jpg" alt="Permukaan PPF murah retak-retak dan kusam" loading="lazy">
+                  <div class="pf-defect-thumb-info">
+                    <span class="pf-cheap-tag">Contoh PPF murah · Permukaan retak dan kusam</span>
+                    <small>Permukaan PPF murah retak-retak (crazing) &amp; kusam · <b>Lihat foto 🔍</b></small>
+                  </div>
+                </div>
               </div>
-            </button>
+            </div>
           </div>
         </div>
 
@@ -796,7 +827,14 @@
     <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.4.2.5.3.1.2.1.7-.1 1.2z"/></svg>
   </a>
 
+  <!-- Lightbox for Defect Photos -->
+  <div class="lightbox" id="pfLightbox">
+    <button class="lb-close" id="pfLbClose" aria-label="Tutup foto">&times;</button>
+    <img id="pfLbImg" alt="">
+    <p id="pfLbCap"></p>
+  </div>
+
   <script src="js/data.js?v=6"></script>
-  <script src="js/ppf.js?v=1"></script>
+  <script src="js/ppf.js?v=2"></script>
 </body>
 </html>

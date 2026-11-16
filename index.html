@@ -203,7 +203,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20">
+  <link rel="stylesheet" href="css/style.css?v=21">
   <script src="js/theme.js?v=5"></script>
 </head>
 <body>
@@ -219,7 +219,7 @@
         <a href="#home">Home</a><a href="/tentang">Tentang</a><a href="/ppf">Produk PPF</a><a href="#layanan">Layanan</a>
         <a href="#gallery">Gallery</a><!-- Harga disembunyikan sementara: <a href="#harga">Harga</a> --><a href="/video">Video</a><a href="#reviews">Review</a><a href="#faq">FAQ</a><a href="#location">Location</a>
         <a href="#news">News</a><a href="#contact">Contact</a>
-        <a class="btn btn-gold nav-cta-mobile wa-link" href="#">Konsultasi via WhatsApp</a>
+        <a class="btn btn-gold nav-cta-mobile wa-link" href="#">Cek Paket &amp; Promo Spesial Disini</a>
       </nav>
       <div class="nav-right">
         <button class="theme-toggle" id="themeToggle" aria-label="Ganti Tema (Siang / Malam)" title="Mode Siang / Malam">
@@ -234,7 +234,7 @@
           </svg>
           <span class="theme-label" id="themeText"></span>
         </button>
-        <a class="btn btn-gold nav-cta wa-link" id="navCta" href="#"><span class="cta-long">Konsultasi via</span>WhatsApp</a>
+        <a class="btn btn-gold nav-cta wa-link" id="navCta" href="#"><span class="cta-long">Cek Paket &amp; </span>Promo Disini</a>
         <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -263,18 +263,45 @@
     </section>
 
     <section class="section" id="ppf">
-      <div class="container about">
-        <div class="about-img reveal"><img id="aboutImg" alt="Pemasangan Paint Protection Film"></div>
-        <div class="about-text reveal">
-          <span class="eyebrow">Edukasi</span>
-          <h2 id="aboutTitle"></h2>
-          <p class="lead" id="aboutText"></p>
-          <div class="benefits" id="benefits"></div>
-          <div style="display:flex;gap:14px;flex-wrap:wrap">
-            <a class="btn btn-gold wa-link" href="#">Cek Paket &amp; Promo Spesial Disini</a>
-            <a class="btn btn-ghost" href="/ppf">Lihat Detail &amp; Seri PPF &rarr;</a>
+      <div class="container about-wrap">
+        <div class="about-showcase">
+          <div class="about-text reveal">
+            <span class="eyebrow">Edukasi &amp; Spesifikasi</span>
+            <h2 id="aboutTitle"></h2>
+            <p class="lead" id="aboutText"></p>
+            <div class="about-pills">
+              <span><i>✦</i> Aliphatic TPU</span>
+              <span><i>✦</i> Self-Healing Aktif</span>
+              <span><i>✦</i> Super Hydrophobic</span>
+              <span><i>✦</i> Garansi Resmi 5–10 Thn</span>
+            </div>
+            <div class="about-cta">
+              <a class="btn btn-gold btn-lg wa-link" href="#">Cek Paket &amp; Promo Spesial Disini</a>
+              <a class="btn btn-ghost btn-lg" href="/ppf">Lihat Detail &amp; Seri PPF &rarr;</a>
+            </div>
+          </div>
+
+          <div class="about-img reveal" id="aboutShowcaseCard">
+            <div class="about-frame">
+              <div class="about-frame-head">
+                <span class="about-frame-dot"></span>
+                <strong>Spesifikasi Material Resmi</strong>
+                <button type="button" class="about-zoom-btn" id="aboutZoomBtn" aria-label="Perbesar gambar spesifikasi">🔍 Perbesar</button>
+              </div>
+              <div class="about-media-box" id="aboutMediaBox" role="button" tabindex="0" aria-label="Klik untuk memperbesar gambar spesifikasi PPF">
+                <img id="aboutImg" alt="Spesifikasi Material Paint Protection Film X-Project">
+                <span class="about-zoom-hint">Klik gambar untuk layar penuh</span>
+              </div>
+              <div class="about-metrics">
+                <div class="about-metric"><strong>8.5 mil</strong><span>~215 Mikron TPU</span></div>
+                <div class="about-metric"><strong>97 GU</strong><span>High Clarity Gloss</span></div>
+                <div class="about-metric"><strong>5–10 Thn</strong><span>Garansi Resmi</span></div>
+              </div>
+            </div>
           </div>
         </div>
+
+        <div class="benefits" id="benefits"></div>
       </div>
     </section>
 
@@ -546,6 +573,6 @@
   </div>
 
   <script src="js/data.js?v=6"></script>
-  <script src="js/main.js?v=14"></script>
+  <script src="js/main.js?v=15"></script>
 </body>
 </html>
