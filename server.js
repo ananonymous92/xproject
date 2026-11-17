@@ -275,6 +275,114 @@ app.post('/api/upload', writeLimiter, sameOrigin, requireAuth, (req, res) => {
 
 app.use('/api', (req, res) => res.status(404).json({ error: 'Not found' }));
 
+function slugify(str = '') {
+  return String(str)
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '') || 'artikel';
+}
+
+function buildNewsWithSlugs(news = []) {
+  const used = new Set();
+  return (Array.isArray(news) ? news : []).map((item, idx) => {
+    const base = slugify(item.title || `artikel-${idx + 1}`);
+    let slug = base;
+    let n = 2;
+    while (used.has(slug)) slug = `${base}-${n++}`;
+    used.add(slug);
+    return { ...item, slug };
+  });
+}
+
+function escHtml(str = '') {
+  return String(str).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+
+function formatSsrParagraphs(raw = '') {
+  return String(raw || '')
+    .split(/\n{2,}/)
+    .map((b) => b.trim())
+    .filter(Boolean)
+    .map((b) => `<p>${escHtml(b).replace(/\n/g, '<br>')}</p>`)
+    .join('');
+}
+
+function renderNewsPage(slug = '') {
+  let html = fs.readFileSync(path.join(ROOT, 'news.html'), 'utf8');
+  const content = readContent();
+  const brandName = content.brand?.name || 'X-Project';
+  const items = buildNewsWithSlugs(content.news);
+
+  if (!slug) {
+    const listHtml = items.map((a) => {
+      const imgPath = /^(assets|uploads)\//i.test(a.image || '') ? `/${a.image}` : (a.image || '/assets/ppf.jpg');
+      return `<a class="nw-card" href="/news/${escHtml(a.slug)}" data-slug="${escHtml(a.slug)}"><div class="nw-card-thumb"><img src="${escHtml(imgPath)}" alt="${escHtml(a.title)}" loading="lazy"></div><div class="nw-card-body"><div class="nw-meta-row"><time datetime="${escHtml(a.date || '')}">${escHtml(a.date || '')}</time></div><h3>${escHtml(a.title)}</h3><p>${escHtml(a.text || '')}</p><span class="nw-read-more">Baca Selengkapnya &rarr;</span></div></a>`;
+    }).join('');
+    return html.replace('<!--SSR_NEWS_LIST-->', listHtml);
+  }
+
+  const matched = items.find((a) => a.slug === slug);
+  if (!matched) return null;
+
+  const absUrl = `https://www.xprojectppf.id/news/${matched.slug}`;
+  const desc = matched.text || String(matched.content || '').slice(0, 155);
+  const imgPath = /^(assets|uploads)\//i.test(matched.image || '') ? `/${matched.image}` : (matched.image || '/assets/ppf.jpg');
+  const absImg = imgPath.startsWith('https://') ? imgPath : `https://www.xprojectppf.id${imgPath}`;
+  const pageTitle = `${matched.title} — ${brandName}`;
+
+  const schemaObj = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.xprojectppf.id/' },
+          { '@type': 'ListItem', position: 2, name: 'News & Artikel', item: 'https://www.xprojectppf.id/news' },
+          { '@type': 'ListItem', position: 3, name: matched.title, item: absUrl }
+        ]
+      },
+      {
+        '@type': 'BlogPosting',
+        '@id': `${absUrl}#article`,
+        mainEntityOfPage: absUrl,
+        headline: matched.title,
+        description: desc,
+        image: absImg,
+        datePublished: matched.date || '2026-11-17',
+        dateModified: matched.date || '2026-11-17',
+        author: { '@type': 'Organization', name: brandName },
+        publisher: {
+          '@type': 'Organization',
+          name: brandName,
+          logo: { '@type': 'ImageObject', url: 'https://www.xprojectppf.id/assets/logo.png' }
+        }
+      }
+    ]
+  };
+
+  html = html
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>${escHtml(pageTitle)}</title>`)
+    .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escHtml(desc)}">`)
+    .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${escHtml(absUrl)}">`)
+    .replace(/<meta property="og:type" content="[^"]*">/, `<meta property="og:type" content="article">`)
+    .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${escHtml(absUrl)}">`)
+    .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escHtml(pageTitle)}">`)
+    .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${escHtml(desc)}">`)
+    .replace(/<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${escHtml(absImg)}">`)
+    .replace(/<script type="application\/ld\+json" id="nwSchema">[\s\S]*?<\/script>/, `<script type="application/ld+json" id="nwSchema">\n${JSON.stringify(schemaObj, null, 2).replace(/</g, '\\u003c')}\n  </script>`)
+    .replace('<div id="nwIndexView"><!--SSR_INDEX_ATTR-->', '<div id="nwIndexView" hidden>')
+    .replace('<article class="nw-reader" id="nwReader" hidden><!--SSR_ARTICLE_ATTR-->', '<article class="nw-reader" id="nwReader">')
+    .replace(/<!--SSR_ARTICLE_TITLE-->/g, escHtml(matched.title))
+    .replace('<!--SSR_ARTICLE_DATE-->', escHtml(matched.date || ''))
+    .replace('<!--SSR_ARTICLE_DESC-->', escHtml(matched.text || ''))
+    .replace('<!--SSR_ARTICLE_IMG-->', escHtml(imgPath))
+    .replace('<!--SSR_ARTICLE_BODY-->', formatSsrParagraphs(matched.content || matched.text || ''));
+
+  return html;
+}
+
 /* ---------- Static: HANYA folder/file publik yang di-whitelist ---------- */
 const staticOpts = { dotfiles: 'deny', index: false, maxAge: IS_PROD ? '7d' : 0 };
 app.use('/css', express.static(path.join(ROOT, 'css'), staticOpts));
@@ -283,7 +391,16 @@ app.use('/assets', express.static(path.join(ROOT, 'assets'), staticOpts));
 app.use('/uploads', express.static(UPLOAD_DIR, staticOpts));
 app.get('/favicon.ico', (req, res) => res.sendFile(path.join(ROOT, 'assets', 'favicon.ico')));
 app.get('/robots.txt', (req, res) => res.sendFile(path.join(ROOT, 'robots.txt')));
-app.get('/sitemap.xml', (req, res) => { res.setHeader('Content-Type', 'application/xml'); res.sendFile(path.join(ROOT, 'sitemap.xml')); });
+app.get('/sitemap.xml', (req, res) => {
+  const base = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
+  const items = buildNewsWithSlugs(readContent().news);
+  const articleUrls = items.map((a) => {
+    const mod = /^\d{4}-\d{2}-\d{2}$/.test(a.date || '') ? a.date : '2026-11-17';
+    return `  <url>\n    <loc>https://www.xprojectppf.id/news/${escHtml(a.slug)}</loc>\n    <lastmod>${mod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`;
+  }).join('\n');
+  res.setHeader('Content-Type', 'application/xml');
+  res.send(base.replace('</urlset>', `${articleUrls}\n</urlset>`));
+});
 app.get('/index.html', (req, res) => res.redirect(301, '/'));
 app.get('/', (req, res) => res.sendFile(path.join(ROOT, 'index.html')));
 app.get('/video.html', (req, res) => res.redirect(301, '/video'));
@@ -292,6 +409,13 @@ app.get('/tentang.html', (req, res) => res.redirect(301, '/tentang'));
 app.get('/tentang', (req, res) => res.sendFile(path.join(ROOT, 'tentang.html')));
 app.get('/ppf.html', (req, res) => res.redirect(301, '/ppf'));
 app.get('/ppf', (req, res) => res.sendFile(path.join(ROOT, 'ppf.html')));
+app.get('/news.html', (req, res) => res.redirect(301, '/news'));
+app.get('/news', (req, res) => res.type('html').send(renderNewsPage('')));
+app.get('/news/:slug', (req, res) => {
+  const page = renderNewsPage(req.params.slug);
+  if (!page) return res.status(404).send('Not found');
+  res.type('html').send(page);
+});
 app.get('/admin.html', (req, res) => { res.setHeader('X-Robots-Tag', 'noindex, nofollow'); res.sendFile(path.join(ROOT, 'admin.html')); });
 
 app.use((req, res) => res.status(404).send('Not found'));

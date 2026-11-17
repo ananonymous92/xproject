@@ -364,8 +364,24 @@
   };
 
   if ($('newsGrid')) {
-    $('newsGrid').innerHTML = C.news.map((n, i) => `
-      <article class="post reveal" data-news-idx="${i}" tabindex="0" role="button" aria-label="Baca artikel lengkap: ${esc(n.title)}">
+    const slugify = (str = '') => String(str)
+      .toLowerCase()
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'artikel';
+    const usedSlugs = new Set();
+    const newsWithSlugs = (Array.isArray(C.news) ? C.news : []).map((n, idx) => {
+      const base = slugify(n.title || `artikel-${idx + 1}`);
+      let slug = base;
+      let k = 2;
+      while (usedSlugs.has(slug)) slug = `${base}-${k++}`;
+      usedSlugs.add(slug);
+      return { ...n, slug };
+    });
+
+    $('newsGrid').innerHTML = newsWithSlugs.map((n) => `
+      <a class="post reveal" href="/news/${esc(n.slug)}" aria-label="Baca artikel lengkap: ${esc(n.title)}">
         <div class="thumb"><img src="${esc(safeUrl(n.image, ''))}" alt="${esc(n.title)}" loading="lazy"></div>
         <div class="body">
           <time>${fmt(n.date)}</time>
@@ -373,24 +389,8 @@
           <p>${esc(n.text)}</p>
           <span class="post-link">Baca Selengkapnya <span>&rarr;</span></span>
         </div>
-      </article>
+      </a>
     `).join('');
-
-    $('newsGrid').addEventListener('click', (e) => {
-      const card = e.target.closest('.post');
-      if (!card) return;
-      const idx = parseInt(card.getAttribute('data-news-idx'), 10);
-      if (!isNaN(idx)) openArticle(idx);
-    });
-    $('newsGrid').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        const card = e.target.closest('.post');
-        if (!card) return;
-        e.preventDefault();
-        const idx = parseInt(card.getAttribute('data-news-idx'), 10);
-        if (!isNaN(idx)) openArticle(idx);
-      }
-    });
   }
 
   $('articleModalClose')?.addEventListener('click', closeArticle);
