@@ -124,6 +124,20 @@
         ['instagram', 'Instagram (URL https atau @Username)'],
         ['copyright', 'Teks Hak Cipta / Copyright']
       ]
+    },
+    promoPopup: {
+      title: 'Popup Promo / Iklan',
+      fields: [
+        ['enabled', 'Aktifkan Popup Promo saat Pertama Kali Masuk Website', 'bool'],
+        ['image', 'Gambar / Poster Iklan Promo', 'image'],
+        ['badge', 'Label Badge Promo (cth: PROMO SPESIAL BULAN INI)'],
+        ['title', 'Judul Utama Promo'],
+        ['subtitle', 'Deskripsi Singkat Promo', 'textarea'],
+        ['perks', 'Daftar Keunggulan / Bonus Promo (satu poin per baris)', 'textarea'],
+        ['ctaText', 'Teks Tombol Klaim Promo'],
+        ['waMessage', 'Pesan Otomatis WhatsApp saat Klik Promo', 'textarea'],
+        ['delaySeconds', 'Jeda Muncul Setelah Halaman Dibuka (detik, cth: 2)']
+      ]
     }
   };
   let current = 'brand';

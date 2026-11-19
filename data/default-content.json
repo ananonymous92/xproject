@@ -207,5 +207,16 @@
     "facebook": "https://facebook.com/xproject.id",
     "instagram": "https://instagram.com/xproject.id",
     "copyright": "All rights reserved."
+  },
+  "promoPopup": {
+    "enabled": true,
+    "image": "assets/hero.jpg",
+    "badge": "PROMO SPESIAL BULAN INI",
+    "title": "Paket Full Body PPF + Bonus Eksklusif!",
+    "subtitle": "Lindungi cat orisinal mobil Anda dengan PPF TPU Alifatik PCL 8.5 mil dan klaim paket bonus spesial terbatas:",
+    "perks": "Free Towing Antar-Jemput 2x (Jabodetabek)\nFree Poles & Detailing Menyeluruh\nFree Carpet Set Eksklusif & Interior PPF\nGaransi Resmi hingga 8–10 Tahun",
+    "ctaText": "Klaim Promo via WhatsApp",
+    "waMessage": "Halo X-Project, saya melihat Popup Promo Spesial di website dan ingin cek paket promo PPF untuk mobil saya.",
+    "delaySeconds": "2"
   }
 }
