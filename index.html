@@ -92,6 +92,14 @@
           "@type": "Brand",
           "name": "X-Project"
         },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "bestRating": "5",
+          "worstRating": "1",
+          "ratingCount": "28",
+          "reviewCount": "3"
+        },
         "offers": {
           "@type": "Offer",
           "url": "https://www.xprojectppf.id/#harga",
@@ -115,6 +123,14 @@
           "@type": "Brand",
           "name": "X-Project"
         },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "bestRating": "5",
+          "worstRating": "1",
+          "ratingCount": "28",
+          "reviewCount": "3"
+        },
         "offers": {
           "@type": "Offer",
           "url": "https://www.xprojectppf.id/#harga",
@@ -137,6 +153,14 @@
         "brand": {
           "@type": "Brand",
           "name": "X-Project"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "bestRating": "5",
+          "worstRating": "1",
+          "ratingCount": "28",
+          "reviewCount": "3"
         },
         "offers": {
           "@type": "Offer",
@@ -203,7 +227,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=22">
+  <link rel="stylesheet" href="css/style.css?v=23">
   <script src="js/theme.js?v=5"></script>
 </head>
 <body>
@@ -242,22 +266,22 @@
 
   <main>
     <section class="hero" id="home">
-      <div class="hero-bg" id="heroBg"></div>
+      <div class="hero-bg" id="heroBg"><img class="hero-bg-img" id="heroBgImg" src="assets/hero.jpg" alt="X-Project Paint Protection Film" fetchpriority="high"></div>
       <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="none" poster="assets/hero.jpg"></video>
       <div class="hero-overlay"></div>
       <div class="container hero-content">
-        <span class="eyebrow anim-in" id="heroEyebrow"></span>
-        <h1 class="anim-in d1" id="heroHeadline"></h1>
-        <p class="hero-sub anim-in d2" id="heroSub"></p>
-        <div class="hero-cta anim-in d3">
-          <a class="btn btn-gold btn-lg wa-link" id="heroCta1" href="#"></a>
-          <a class="btn btn-ghost btn-lg" id="heroCta2" href="#layanan"></a>
+        <span class="eyebrow" id="heroEyebrow">Premium Paint Protection Film</span>
+        <h1 id="heroHeadline">Lindungi Cat Mobil Anda. Pertahankan Kilau Seperti Baru.</h1>
+        <p class="hero-sub" id="heroSub">Premium Paint Protection Film untuk melindungi permukaan kendaraan dari goresan, stone chip, noda, dan berbagai risiko penggunaan sehari-hari.</p>
+        <div class="hero-cta">
+          <a class="btn btn-gold btn-lg wa-link" id="heroCta1" href="#">Cek Paket &amp; Promo Spesial Disini</a>
+          <a class="btn btn-ghost btn-lg" id="heroCta2" href="#layanan">Lihat Layanan Kami</a>
           <a class="btn btn-ghost btn-lg btn-video-hero" id="heroCtaVideo" href="/video">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
             <span>Video Studio</span>
           </a>
         </div>
-        <div class="hero-badges anim-in d4" id="heroBadges"></div>
+        <div class="hero-badges" id="heroBadges"><span>Premium Protection</span><span>Self Healing</span><span>High Gloss</span><span>Professional Installation</span></div>
       </div>
       <a href="#ppf" class="scroll-hint" aria-label="Scroll"><span></span></a>
     </section>
@@ -267,8 +291,8 @@
         <div class="about-showcase">
           <div class="about-text reveal">
             <span class="eyebrow">Edukasi &amp; Spesifikasi</span>
-            <h2 id="aboutTitle"></h2>
-            <p class="lead" id="aboutText"></p>
+            <h2 id="aboutTitle">Apa Itu Paint Protection Film?</h2>
+            <p class="lead" id="aboutText">Paint Protection Film (PPF) adalah lapisan film transparan khusus yang diaplikasikan pada permukaan cat kendaraan untuk membantu melindungi cat dari berbagai risiko penggunaan sehari-hari seperti stone chip, goresan ringan, noda, dan kontaminasi permukaan.</p>
             <div class="about-pills">
               <span><i>✦</i> Aliphatic TPU</span>
               <span><i>✦</i> Self-Healing Aktif</span>
@@ -289,7 +313,7 @@
                 <button type="button" class="about-zoom-btn" id="aboutZoomBtn" aria-label="Perbesar gambar spesifikasi">🔍 Perbesar</button>
               </div>
               <div class="about-media-box" id="aboutMediaBox" role="button" tabindex="0" aria-label="Klik untuk memperbesar gambar spesifikasi PPF">
-                <img id="aboutImg" alt="Spesifikasi Material Paint Protection Film X-Project">
+                <img id="aboutImg" src="assets/ppf.jpg" alt="Spesifikasi Material Paint Protection Film X-Project" loading="lazy">
                 <span class="about-zoom-hint">Klik gambar untuk layar penuh</span>
               </div>
               <div class="about-metrics">
@@ -577,7 +601,7 @@
   </div>
 
   <script src="js/data.js?v=6"></script>
-  <script src="js/main.js?v=16"></script>
-  <script src="/js/promo-popup.js?v=1"></script>
+  <script src="js/main.js?v=17"></script>
+  <script src="/js/promo-popup.js?v=2"></script>
 </body>
 </html>

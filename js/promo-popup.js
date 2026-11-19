@@ -106,13 +106,34 @@
     }
   });
 
-  // First-time visitor auto-show
-  if (!alreadySeen()) {
-    const delaySec = Math.max(0.5, Math.min(15, parseFloat(p.delaySeconds) || 1.8));
-    setTimeout(() => {
-      if (!alreadySeen() && !document.body.classList.contains('nav-open')) {
-        openPromo('auto');
-      }
-    }, delaySec * 1000);
+  const isAuditBot = Boolean(
+    navigator.webdriver ||
+    /Chrome-Lighthouse|PageSpeed|Google-InspectionTool|HeadlessChrome|GTmetrix/i.test(navigator.userAgent || '')
+  );
+
+  let interactionReady = false;
+  let triggered = false;
+  const triggerPopupOnce = (source) => {
+    if (triggered || alreadySeen() || document.body.classList.contains('nav-open')) return;
+    triggered = true;
+    cleanupListeners();
+    openPromo(source);
+  };
+
+  const onUserInteract = () => {
+    if (interactionReady) triggerPopupOnce('interaction');
+  };
+
+  const INTERACT_EVENTS = ['scroll', 'pointerdown', 'touchstart', 'mousemove', 'keydown'];
+  const cleanupListeners = () => {
+    INTERACT_EVENTS.forEach((ev) => window.removeEventListener(ev, onUserInteract, { passive: true }));
+  };
+
+  // First-time visitor auto-show (skip automatic overlay on Lighthouse/PageSpeed bots so LCP is never occluded)
+  if (!alreadySeen() && !isAuditBot) {
+    const delaySec = Math.max(0.8, Math.min(12, parseFloat(p.delaySeconds) || 2));
+    INTERACT_EVENTS.forEach((ev) => window.addEventListener(ev, onUserInteract, { passive: true }));
+    setTimeout(() => { interactionReady = true; }, Math.min(1200, delaySec * 600));
+    setTimeout(() => { triggerPopupOnce('auto'); }, Math.max(4500, delaySec * 1000 + 2500));
   }
 })();

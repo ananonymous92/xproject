@@ -41,7 +41,13 @@
   $('year').textContent = new Date().getFullYear();
 
   // Hero
-  $('heroBg').style.backgroundImage = `url("${safeUrl(C.hero.image, '').replace(/["\\]/g, '')}")`;
+  const heroBgUrl = safeUrl(C.hero.image, 'assets/hero.jpg');
+  const heroBgImg = $('heroBgImg');
+  if (heroBgImg && heroBgUrl && heroBgImg.getAttribute('src') !== heroBgUrl) {
+    heroBgImg.src = heroBgUrl;
+  } else if (!heroBgImg && heroBgUrl) {
+    $('heroBg').style.backgroundImage = `url("${heroBgUrl.replace(/["\\]/g, '')}")`;
+  }
   const heroVid = $('heroVideo');
   if (heroVid) {
     if (C.hero.video && safeUrl(C.hero.video, '') !== '') {
