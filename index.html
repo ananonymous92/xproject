@@ -464,10 +464,12 @@
             <ul class="contact-list" id="contactList"></ul>
           </div>
           <form class="contact-form" id="contactForm">
-            <input id="fName" placeholder="Nama Lengkap" required>
-            <input id="fCar" placeholder="Merek & Tipe Mobil" required>
-            <select id="fPkg"></select>
-            <textarea id="fMsg" rows="3" placeholder="Pesan (opsional)"></textarea>
+            <input id="fName" placeholder="Nama Lengkap" aria-label="Nama Lengkap" required>
+            <input id="fCar" placeholder="Merek & Tipe Mobil" aria-label="Merek dan Tipe Mobil" required>
+            <select id="fPkg" aria-label="Pilih Paket Perlindungan">
+              <option value="">Pilih Paket (opsional)</option>
+            </select>
+            <textarea id="fMsg" rows="3" placeholder="Pesan (opsional)" aria-label="Pesan Tambahan"></textarea>
             <button class="btn btn-gold btn-lg" type="submit">Kirim via WhatsApp</button>
           </form>
         </div>
@@ -499,7 +501,7 @@
 
       <!-- Col 2: Navigasi Cepat -->
       <div class="footer-col">
-        <h4 class="footer-title">Navigasi</h4>
+        <h3 class="footer-title">Navigasi</h3>
         <ul class="footer-links">
           <li><a href="#home">Home</a></li>
           <li><a href="/tentang">Tentang X-Project</a></li>
@@ -518,7 +520,7 @@
 
       <!-- Col 3: Informasi Kontak & Jam Buka -->
       <div class="footer-col">
-        <h4 class="footer-title">Studio & Kontak</h4>
+        <h3 class="footer-title">Studio & Kontak</h3>
         <ul class="footer-contact">
           <li>
             <i class="f-icon">📍</i>
@@ -566,7 +568,7 @@
   </div>
 
   <!-- Article Reader Modal -->
-  <div class="article-modal" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="modalArticleTitle">
+  <div class="article-modal" id="articleModal" role="dialog" aria-modal="true" aria-label="Detail Artikel" aria-labelledby="modalArticleTitle">
     <div class="article-modal-backdrop" id="articleModalBackdrop"></div>
     <div class="article-modal-card">
       <button class="article-modal-close" id="articleModalClose" aria-label="Tutup artikel">&times;</button>
@@ -578,7 +580,7 @@
           <time id="modalArticleDate"></time>
           <span class="badge-cat">Edukasi & Tips PPF</span>
         </div>
-        <h2 id="modalArticleTitle"></h2>
+        <h2 id="modalArticleTitle">Detail Artikel X-Project</h2>
         <div class="article-modal-text" id="modalArticleContent"></div>
         <div class="article-modal-cta">
           <div>
